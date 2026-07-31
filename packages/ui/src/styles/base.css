@@ -1,0 +1,109 @@
+@import "./tokens.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  background: var(--surface-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-sans, "Geist Sans", "Instrument Sans", system-ui, sans-serif);
+  font-size: var(--font-body);
+  line-height: var(--leading-normal);
+}
+
+/* Slim scrollbars that expand on hover */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+*::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+  height: var(--scrollbar-width);
+  transition: width var(--duration-normal) var(--ease-out);
+}
+
+*:hover::-webkit-scrollbar {
+  width: var(--scrollbar-width-hover);
+  height: var(--scrollbar-width-hover);
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: var(--pill-radius);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--border-strong);
+}
+
+:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Rainbow trace for SpringActionButton */
+@keyframes rainbow-border {
+  0% {
+    background: conic-gradient(from 0deg, #ef4444, #f97316, #eab308, #22c55e, #3b82f6, #8b5cf6, #ef4444);
+  }
+  100% {
+    background: conic-gradient(from 360deg, #ef4444, #f97316, #eab308, #22c55e, #3b82f6, #8b5cf6, #ef4444);
+  }
+}
+
+.spring-action-rainbow {
+  position: relative;
+}
+
+.spring-action-rainbow::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: calc(var(--button-radius) + 2px);
+  padding: 2px;
+  background: conic-gradient(from var(--angle, 0deg), #ef4444, #f97316, #eab308, #22c55e, #3b82f6, #8b5cf6, #ef4444);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.spring-action-rainbow.is-tracing::after {
+  opacity: 1;
+  animation: rainbow-border 600ms linear forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spring-action-rainbow.is-tracing::after {
+    animation: none;
+    background: var(--brand-primary);
+    opacity: 1;
+    transition: opacity 150ms;
+  }
+}

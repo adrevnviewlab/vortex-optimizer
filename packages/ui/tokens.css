@@ -1,0 +1,135 @@
+:root {
+  /* ── Brand ── */
+  --brand-primary:        #0D9488;
+  --brand-primary-hover:  #0F766E;
+  --brand-primary-subtle: #CCFBF1;
+  --brand-primary-muted:  #F0FDFA;
+  --brand-secondary:      #334155;
+  --brand-accent:         #0891B2;
+
+  /* ── Surface (light canvas only) ── */
+  --surface-canvas:       #FFFFFF;
+  --surface-raised:       #FFFFFF;
+  --surface-sunken:       #F8FAFC;
+  --surface-overlay:      rgba(15, 23, 42, 0.40);
+  --surface-dock:         rgba(255, 255, 255, 0.72);
+  --surface-dock-border:  rgba(0, 0, 0, 0.08);
+
+  /* ── Text ── */
+  --text-primary:         #0F172A;
+  --text-secondary:       #475569;
+  --text-tertiary:        #94A3B8;
+  --text-inverse:         #FFFFFF;
+  --text-link:            var(--brand-primary);
+
+  /* ── Border ── */
+  --border-default:       #E2E8F0;
+  --border-strong:        #CBD5E1;
+  --border-focus:         var(--brand-primary);
+
+  /* ── Status (RAG only — never brand) ── */
+  --status-red:           #DC2626;
+  --status-red-bg:        #FEF2F2;
+  --status-red-border:    #FECACA;
+  --status-amber:         #D97706;
+  --status-amber-bg:      #FFFBEB;
+  --status-amber-border:  #FDE68A;
+  --status-green:         #16A34A;
+  --status-green-bg:      #F0FDF4;
+  --status-green-border:  #BBF7D0;
+
+  /* ── Semantic ── */
+  --semantic-info:        #0284C7;
+  --semantic-info-bg:     #F0F9FF;
+  --semantic-danger:      var(--status-red);
+  --semantic-warning:     var(--status-amber);
+  --semantic-success:     var(--status-green);
+
+  /* ── Typography scale ── */
+  --font-display:         clamp(2rem, 4vw, 3rem);
+  --font-h1:              clamp(1.5rem, 2.5vw, 2rem);
+  --font-h2:              1.25rem;
+  --font-h3:              1.0625rem;
+  --font-body:            0.9375rem;
+  --font-body-sm:         0.8125rem;
+  --font-caption:         0.75rem;
+  --font-mono:            0.8125rem;
+
+  --weight-regular:       400;
+  --weight-medium:        500;
+  --weight-semibold:      600;
+
+  --leading-tight:        1.2;
+  --leading-normal:       1.5;
+  --leading-relaxed:      1.65;
+
+  --tracking-tight:       -0.02em;
+  --tracking-normal:      0;
+  --tracking-wide:        0.04em;
+
+  /* ── Spacing (4px base) ── */
+  --space-0:   0;
+  --space-1:   0.25rem;
+  --space-2:   0.5rem;
+  --space-3:   0.75rem;
+  --space-4:   1rem;
+  --space-5:   1.25rem;
+  --space-6:   1.5rem;
+  --space-8:   2rem;
+  --space-10:  2.5rem;
+  --space-12:  3rem;
+  --space-16:  4rem;
+  --space-20:  5rem;
+
+  /* ── Layout ── */
+  --sidenav-width:        240px;
+  --sidenav-collapsed:    64px;
+  --header-height:        56px;
+  --dock-height:          52px;
+  --content-max-width:    1280px;
+  --card-radius:          12px;
+  --button-radius:        8px;
+  --input-radius:         8px;
+  --pill-radius:          999px;
+
+  /* ── Breakpoints (reference) ── */
+  --bp-sm:  640px;
+  --bp-md:  768px;
+  --bp-lg:  1024px;
+  --bp-xl:  1280px;
+  --bp-2xl: 1536px;
+
+  /* ── Elevation ── */
+  --shadow-xs:  0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-sm:  0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-md:  0 4px 12px rgba(15, 23, 42, 0.08);
+  --shadow-lg:  0 12px 32px rgba(15, 23, 42, 0.10);
+  --shadow-dock: 0 8px 32px rgba(15, 23, 42, 0.12), 0 0 0 1px var(--surface-dock-border);
+
+  /* ── Motion tokens ── */
+  --spring-stiffness:     380;
+  --spring-damping:       28;
+  --duration-fast:        150ms;
+  --duration-normal:      250ms;
+  --duration-slow:        400ms;
+  --ease-out:             cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ── Scrollbar ── */
+  --scrollbar-width:      4px;
+  --scrollbar-width-hover: 8px;
+  --scrollbar-thumb:      #CBD5E1;
+  --scrollbar-track:      transparent;
+}
+
+@keyframes rainbow-trace {
+  0%   { --angle: 0deg; }
+  100% { --angle: 360deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-normal: 0ms;
+    --duration-slow: 0ms;
+  }
+}

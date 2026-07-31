@@ -1,0 +1,36 @@
+# Render Blueprint — Vortex Optimizer API
+# Docs: https://render.com/docs/blueprint-spec
+#
+# Deploy: connect repo in Render dashboard → New Blueprint → select this file.
+# Set secret env vars in the dashboard (never commit values).
+
+services:
+  - type: web
+    name: vorzop-api
+    runtime: node
+    plan: starter
+    region: oregon
+    rootDir: .
+    buildCommand: pnpm install --frozen-lockfile && pnpm turbo build --filter=@vorzop/api
+    preDeployCommand: pnpm db:migrate
+    startCommand: node apps/api/dist/index.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: APP_URL
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: API_JWT_SECRET
+        generateValue: true
+      - key: STRIPE_CONNECTED
+        value: "false"
+      - key: FEATURE_GRAPH_SYNC
+        value: "false"
+      - key: FEATURE_STRIPE
+        value: "false"
+      - key: FEATURE_PDF_REPORTS
+        value: "false"

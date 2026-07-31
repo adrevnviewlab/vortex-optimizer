@@ -1,0 +1,26 @@
+{
+  "name": "@vorzop/domain",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@vorzop/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.30",
+    "@vorzop/config": "workspace:*",
+    "typescript": "^5.8.3",
+    "vitest": "^2.1.8"
+  }
+}

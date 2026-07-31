@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-display-family: var(--font-instrument-sans);
+  --font-mono: var(--font-geist-mono);
+}

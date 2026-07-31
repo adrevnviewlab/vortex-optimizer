@@ -1,0 +1,49 @@
+{
+  "name": "@vorzop/shared",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./constants": {
+      "types": "./dist/constants/index.d.ts",
+      "import": "./dist/constants/index.js"
+    },
+    "./constants/ms-skus": {
+      "types": "./dist/constants/ms-skus.d.ts",
+      "import": "./dist/constants/ms-skus.js"
+    },
+    "./validators": {
+      "types": "./dist/validators/index.d.ts",
+      "import": "./dist/validators/index.js"
+    },
+    "./types": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/types/index.js"
+    },
+    "./config/modules": {
+      "types": "./dist/config/modules.d.ts",
+      "import": "./dist/config/modules.js"
+    },
+    "./analytics/events": {
+      "types": "./dist/analytics/events.d.ts",
+      "import": "./dist/analytics/events.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "zod": "^3.25.67"
+  },
+  "devDependencies": {
+    "@vorzop/config": "workspace:*",
+    "typescript": "^5.8.3",
+    "vitest": "^2.1.8"
+  }
+}

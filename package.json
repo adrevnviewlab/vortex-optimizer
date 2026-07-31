@@ -1,0 +1,25 @@
+{
+  "name": "vorzop",
+  "private": true,
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "typecheck": "turbo typecheck",
+    "test": "turbo test --filter=!@vorzop/e2e",
+    "lint": "turbo lint",
+    "db:migrate": "pnpm --filter @vorzop/db migrate",
+    "db:seed": "pnpm --filter @vorzop/db seed",
+    "wiring-audit": "tsx scripts/wiring-audit.ts",
+    "deploy:check": "tsx scripts/deploy-check.ts",
+    "e2e:smoke": "pnpm --filter @vorzop/e2e test:smoke"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.4",
+    "turbo": "^2.5.4",
+    "typescript": "^5.8.3"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=22"
+  }
+}
