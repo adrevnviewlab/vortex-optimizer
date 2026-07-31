@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import {
@@ -53,7 +53,7 @@ function formatSyncTime(iso: string | null | undefined): string {
   return new Date(iso).toLocaleString();
 }
 
-export default function SettingsPage() {
+function SettingsPageContent() {
   const { addToast } = useToast();
   const searchParams = useSearchParams();
   const [profile, setProfile] = useState({
@@ -369,5 +369,12 @@ export default function SettingsPage() {
         </Card>
       </div>
     </>
+  );
+}
+export default function SettingsPage() {
+  return (
+    <Suspense fallback={<div className="p-8 text-muted-foreground">Loading settings...¿½</div>}>
+      <SettingsPageContent />
+    </Suspense>
   );
 }

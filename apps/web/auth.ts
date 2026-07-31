@@ -2,13 +2,12 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import type { JWT } from "next-auth/jwt";
 import bcrypt from "bcryptjs";
-import { randomBytes } from "node:crypto";
 import { and, desc, eq, gt } from "drizzle-orm";
 import {
   organizationMembers,
   sessions,
   users,
-} from "@vorzop/db";
+} from "@vorzop/db/schema";
 import type { OrgRole } from "@vorzop/shared";
 import { getDb } from "./lib/db";
 
@@ -109,7 +108,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           return null;
         }
 
-        const sessionToken = randomBytes(32).toString("hex");
+        const sessionBytes = globalThis.crypto.getRandomValues(new Uint8Array(32));
+        const sessionToken = Array.from(sessionBytes, (b) =>
+          b.toString(16).padStart(2, "0"),
+        ).join("");
         await persistSession(user.id, sessionToken);
 
         return {

@@ -1,4 +1,4 @@
-import { createDb, type Db } from "@vorzop/db";
+import { createDb, type Db } from "@vorzop/db/client";
 
 let cached: Db | null = null;
 
