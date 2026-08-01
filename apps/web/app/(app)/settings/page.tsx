@@ -373,7 +373,7 @@ function SettingsPageContent() {
 }
 export default function SettingsPage() {
   return (
-    <Suspense fallback={<div className="p-8 text-muted-foreground">Loading settings...¿½</div>}>
+    <Suspense fallback={<div className="p-8 text-muted-foreground">Loading settings...</div>}>
       <SettingsPageContent />
     </Suspense>
   );
