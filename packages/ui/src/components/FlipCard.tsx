@@ -100,11 +100,6 @@ export function FlipCard({ title, description, icon, step, badge }: FlipCardProp
               {step}
             </p>
           )}
-          {step && (
-            <p className="mb-2 text-[var(--font-caption)] font-semibold text-[var(--brand-primary)]">
-              {step}
-            </p>
-          )}
           <h3 className="text-[var(--font-h3)] font-semibold">{title}</h3>
         </Card>
         <Card

@@ -16,7 +16,7 @@ export function AuthLayout({ title, subtitle, children }: AuthLayoutProps) {
       <div
         className="w-full max-w-md rounded-[var(--card-radius)] border border-[var(--border-default)] bg-[var(--surface-raised)] p-6 shadow-[var(--shadow-md)]"
       >
-        <h1 className="text-[var(--font-h2)] font-semibold tracking-[var(--tracking-tight)]">
+        <h1 className="text-[var(--font-h2)] font-light tracking-[var(--tracking-tight)]">
           {title}
         </h1>
         {subtitle && (

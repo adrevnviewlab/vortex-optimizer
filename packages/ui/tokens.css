@@ -1,63 +1,73 @@
 :root {
-  /* ── Brand ── */
-  --brand-primary:        #0D9488;
-  --brand-primary-hover:  #0F766E;
-  --brand-primary-subtle: #CCFBF1;
-  --brand-primary-muted:  #F0FDFA;
-  --brand-secondary:      #334155;
-  --brand-accent:         #0891B2;
+  /* ── Brand (prozop iOS blue) ── */
+  --brand-primary:        #007aff;
+  --brand-primary-hover:  #0066d6;
+  --brand-primary-subtle: #e8f1ff;
+  --brand-primary-muted:  #007aff14;
+  --brand-secondary:      #3c3c43;
+  --brand-accent:         #5ac8fa;
 
-  /* ── Surface (light canvas only) ── */
-  --surface-canvas:       #FFFFFF;
-  --surface-raised:       #FFFFFF;
-  --surface-sunken:       #F8FAFC;
-  --surface-overlay:      rgba(15, 23, 42, 0.40);
-  --surface-dock:         rgba(255, 255, 255, 0.72);
-  --surface-dock-border:  rgba(0, 0, 0, 0.08);
+  /* ── Surface ── */
+  --surface-canvas:       #ffffff;
+  --surface-raised:       #ffffff;
+  --surface-sunken:       #f2f2f7;
+  --surface-overlay:      rgba(0, 0, 0, 0.4);
+  --surface-dock:         rgba(255, 255, 255, 0.82);
+  --surface-dock-border:  rgba(60, 60, 67, 0.12);
+  --surface-panel:        #f2f2f7;
 
   /* ── Text ── */
-  --text-primary:         #0F172A;
-  --text-secondary:       #475569;
-  --text-tertiary:        #94A3B8;
-  --text-inverse:         #FFFFFF;
+  --text-primary:         #111111;
+  --text-secondary:       #3c3c43;
+  --text-tertiary:        rgba(60, 60, 67, 0.6);
+  --text-inverse:         #ffffff;
   --text-link:            var(--brand-primary);
 
   /* ── Border ── */
-  --border-default:       #E2E8F0;
-  --border-strong:        #CBD5E1;
+  --border-default:       rgba(60, 60, 67, 0.18);
+  --border-strong:        #c6c6c8;
   --border-focus:         var(--brand-primary);
 
-  /* ── Status (RAG only — never brand) ── */
-  --status-red:           #DC2626;
-  --status-red-bg:        #FEF2F2;
-  --status-red-border:    #FECACA;
-  --status-amber:         #D97706;
-  --status-amber-bg:      #FFFBEB;
-  --status-amber-border:  #FDE68A;
-  --status-green:         #16A34A;
-  --status-green-bg:      #F0FDF4;
-  --status-green-border:  #BBF7D0;
+  /* ── Status (iOS system colors) ── */
+  --status-red:           #ff3b30;
+  --status-red-bg:        rgba(255, 59, 48, 0.12);
+  --status-red-border:    rgba(255, 59, 48, 0.28);
+  --status-amber:         #ff9500;
+  --status-amber-bg:      rgba(255, 149, 0, 0.12);
+  --status-amber-border:  rgba(255, 149, 0, 0.28);
+  --status-green:         #34c759;
+  --status-green-bg:      rgba(52, 199, 89, 0.12);
+  --status-green-border:  rgba(52, 199, 89, 0.28);
+  --status-brass:         #ff9f0a;
 
   /* ── Semantic ── */
-  --semantic-info:        #0284C7;
-  --semantic-info-bg:     #F0F9FF;
+  --semantic-info:        #007aff;
+  --semantic-info-bg:     #e8f1ff;
   --semantic-danger:      var(--status-red);
   --semantic-warning:     var(--status-amber);
   --semantic-success:     var(--status-green);
 
+  /* ── Trace palette (stat accents, charts) ── */
+  --trace-a:              #007aff;
+  --trace-b:              #5ac8fa;
+  --trace-c:              #34c759;
+  --trace-d:              #ff9500;
+  --trace-e:              #af52de;
+
   /* ── Typography scale ── */
-  --font-display:         clamp(2rem, 4vw, 3rem);
-  --font-h1:              clamp(1.5rem, 2.5vw, 2rem);
-  --font-h2:              1.25rem;
+  --font-display:         clamp(1.75rem, 3.5vw, 2rem);
+  --font-h1:              2rem;
+  --font-h2:              1.5rem;
   --font-h3:              1.0625rem;
-  --font-body:            0.9375rem;
-  --font-body-sm:         0.8125rem;
+  --font-body:            1rem;
+  --font-body-sm:         0.84375rem;
   --font-caption:         0.75rem;
   --font-mono:            0.8125rem;
 
   --weight-regular:       400;
   --weight-medium:        500;
   --weight-semibold:      600;
+  --weight-light:         300;
 
   --leading-tight:        1.2;
   --leading-normal:       1.5;
@@ -84,13 +94,18 @@
   /* ── Layout ── */
   --sidenav-width:        240px;
   --sidenav-collapsed:    64px;
-  --header-height:        56px;
+  --header-height:        52px;
   --dock-height:          52px;
   --content-max-width:    1280px;
-  --card-radius:          12px;
+  --card-radius:          16px;
   --button-radius:        8px;
   --input-radius:         8px;
   --pill-radius:          999px;
+
+  /* ── Sidebar (frosted) ── */
+  --sidebar-bg:           rgba(255, 255, 255, 0.82);
+  --sidebar-border:       rgba(60, 60, 67, 0.12);
+  --sidebar-accent:       rgba(0, 122, 255, 0.08);
 
   /* ── Breakpoints (reference) ── */
   --bp-sm:  640px;
@@ -100,11 +115,11 @@
   --bp-2xl: 1536px;
 
   /* ── Elevation ── */
-  --shadow-xs:  0 1px 2px rgba(15, 23, 42, 0.04);
-  --shadow-sm:  0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
-  --shadow-md:  0 4px 12px rgba(15, 23, 42, 0.08);
-  --shadow-lg:  0 12px 32px rgba(15, 23, 42, 0.10);
-  --shadow-dock: 0 8px 32px rgba(15, 23, 42, 0.12), 0 0 0 1px var(--surface-dock-border);
+  --shadow-xs:  0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md:  0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg:  0 12px 40px rgba(0, 0, 0, 0.1);
+  --shadow-dock: 0 8px 32px rgba(0, 0, 0, 0.12), 0 0 0 1px var(--surface-dock-border);
 
   /* ── Motion tokens ── */
   --spring-stiffness:     380;
@@ -117,7 +132,7 @@
   /* ── Scrollbar ── */
   --scrollbar-width:      4px;
   --scrollbar-width-hover: 8px;
-  --scrollbar-thumb:      #CBD5E1;
+  --scrollbar-thumb:      #c6c6c8;
   --scrollbar-track:      transparent;
 }
 

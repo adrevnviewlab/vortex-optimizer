@@ -97,11 +97,13 @@ export default function DashboardPage() {
               delta={data.clientsDelta}
               deltaTone="positive"
               icon={Building2}
+              accent="var(--trace-a)"
             />
             <StatCard
               label="Active audits"
               value={data.activeAudits}
               icon={ScanSearch}
+              accent="var(--trace-d)"
             />
             <StatCard
               label="Identified savings"
@@ -109,6 +111,7 @@ export default function DashboardPage() {
               delta={data.savingsDelta}
               deltaTone="positive"
               icon={TrendingDown}
+              accent="var(--status-brass)"
             />
             <StatCard
               label="Avg compliance"
@@ -116,6 +119,7 @@ export default function DashboardPage() {
               delta={data.avgCompliance < 90 ? "Below target" : undefined}
               deltaTone={data.avgCompliance < 90 ? "warning" : "positive"}
               icon={ShieldCheck}
+              accent="var(--trace-c)"
             />
           </div>
 
@@ -128,7 +132,7 @@ export default function DashboardPage() {
                   <YAxis tick={{ fontSize: 12, fill: "var(--text-tertiary)" }} tickFormatter={(v) => `$${v / 1000}k`} />
                   <Tooltip formatter={(v: number) => formatCurrency(v)} />
                   <Legend />
-                  <Line type="monotone" dataKey="actual" name="Actual spend" stroke="#0D9488" strokeWidth={2} dot={false} />
+                  <Line type="monotone" dataKey="actual" name="Actual spend" stroke="var(--brand-primary)" strokeWidth={2} dot={false} />
                   <Line type="monotone" dataKey="optimized" name="Optimized projection" stroke="#94A3B8" strokeWidth={2} strokeDasharray="5 5" dot={false} />
                 </LineChart>
               </ResponsiveContainer>

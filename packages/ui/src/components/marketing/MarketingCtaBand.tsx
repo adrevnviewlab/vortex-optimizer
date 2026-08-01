@@ -23,8 +23,8 @@ export function MarketingCtaBand({
     <section className="mx-auto max-w-[var(--content-max-width)] px-4 py-16 md:px-6 md:py-24">
       <div className="rounded-[var(--card-radius)] border border-[var(--border-default)] bg-[var(--surface-raised)] p-8 text-center shadow-[var(--shadow-sm)] md:p-12">
         <h2
-          className="font-semibold tracking-[var(--tracking-tight)]"
-          style={{ fontFamily: "var(--font-display-family)", fontSize: "var(--font-h2)" }}
+          className="font-light tracking-[var(--tracking-tight)]"
+          style={{ fontSize: "var(--font-h2)" }}
         >
           {title}
         </h2>

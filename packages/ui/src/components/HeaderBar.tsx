@@ -18,9 +18,7 @@ export function HeaderBar({
   showMobileMenu = true,
 }: HeaderBarProps) {
   return (
-    <header
-      className="sticky top-0 z-30 flex h-[var(--header-height)] items-center justify-between border-b border-[var(--border-default)] bg-[var(--surface-canvas)] px-4"
-    >
+    <header className="sticky top-0 z-30 flex h-[var(--header-height)] items-center justify-between border-b border-[var(--sidebar-border)] bg-[var(--sidebar-bg)] px-4 backdrop-blur-xl">
       <div className="flex items-center gap-2">
         {showMobileMenu && (
           <button

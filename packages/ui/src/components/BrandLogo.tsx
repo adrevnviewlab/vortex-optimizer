@@ -61,7 +61,6 @@ export function BrandLogo({
           <span
             className="font-semibold tracking-tight"
             style={{
-              fontFamily: "var(--font-display-family, 'Instrument Sans', sans-serif)",
               fontSize: size === "lg" ? "1.25rem" : size === "md" ? "1.0625rem" : "0.9375rem",
               letterSpacing: "var(--tracking-tight)",
             }}
@@ -70,7 +69,6 @@ export function BrandLogo({
           </span>
           <span
             style={{
-              fontFamily: "var(--font-sans, 'Geist Sans', sans-serif)",
               fontSize: size === "lg" ? "1.125rem" : size === "md" ? "0.9375rem" : "0.8125rem",
               fontWeight: 400,
               color: "var(--text-secondary)",

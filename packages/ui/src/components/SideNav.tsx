@@ -75,7 +75,7 @@ function NavLinks({
               "relative flex items-center gap-3 rounded-[var(--button-radius)] px-3 py-2.5",
               "text-[var(--font-body-sm)] font-medium transition-colors",
               active
-                ? "bg-[var(--brand-primary-muted)] text-[var(--brand-primary)]"
+                ? "bg-[var(--sidebar-accent)] text-[var(--brand-primary)]"
                 : "text-[var(--text-secondary)] hover:bg-[var(--surface-sunken)] hover:text-[var(--text-primary)]",
               collapsed && "justify-center px-2"
             )}
@@ -126,8 +126,8 @@ export function SideNav({
       animate={{ width: collapsed ? "var(--sidenav-collapsed)" : "var(--sidenav-width)" }}
       transition={springConfig}
       className={cn(
-        "hidden md:flex shrink-0 flex-col border-r border-[var(--border-default)]",
-        "bg-[var(--surface-raised)] h-[calc(100vh-var(--header-height))]"
+        "hidden md:flex shrink-0 flex-col border-r border-[var(--sidebar-border)]",
+        "bg-[var(--sidebar-bg)] backdrop-blur-xl h-[calc(100vh-var(--header-height))]"
       )}
     >
       <div className={cn("flex items-center px-3 py-4", collapsed ? "justify-center" : "gap-2")}>

@@ -21,8 +21,8 @@ export function SectionHeader({
         </p>
       )}
       <h2
-        className="font-semibold tracking-[var(--tracking-tight)]"
-        style={{ fontFamily: "var(--font-display-family)", fontSize: "var(--font-h2)" }}
+        className="font-light tracking-[var(--tracking-tight)]"
+        style={{ fontSize: "var(--font-h2)" }}
       >
         {title}
       </h2>

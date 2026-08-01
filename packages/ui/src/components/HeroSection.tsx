@@ -27,34 +27,31 @@ export function HeroSection({
           <BrandLogo size="lg" href="/welcome" />
         </div>
         <h1
-          className="font-semibold leading-[var(--leading-tight)] tracking-[var(--tracking-tight)]"
-          style={{
-            fontFamily: "var(--font-display-family, 'Instrument Sans', sans-serif)",
-            fontSize: "var(--font-display)",
-          }}
+          className="font-light leading-[var(--leading-tight)] tracking-[var(--tracking-tight)] text-[var(--text-primary)]"
+          style={{ fontSize: "var(--font-display)" }}
         >
           {headline}
         </h1>
-        <p className="mt-4 max-w-xl text-[var(--font-body-lg,1rem)] leading-[var(--leading-relaxed)] text-[var(--text-secondary)]">
+        <p className="mt-4 max-w-xl text-[var(--font-body)] leading-[var(--leading-relaxed)] text-[var(--text-secondary)]">
           {subline}
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
-          <MarketingPrimaryLink href="/signup">Get Started</MarketingPrimaryLink>
+          <MarketingPrimaryLink href="/signup">Get started</MarketingPrimaryLink>
           <motion.a
             href="/demo"
             whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
             transition={springConfig}
-            className="inline-flex h-11 items-center rounded-[var(--button-radius)] border border-[var(--brand-primary)] px-6 text-[var(--font-body)] font-medium text-[var(--brand-primary)] hover:bg-[var(--brand-primary-muted)]"
+            className="inline-flex h-11 items-center rounded-[var(--button-radius)] border border-[var(--brand-primary)] px-6 text-[var(--font-body-sm)] font-medium text-[var(--brand-primary)] hover:bg-[var(--brand-primary-subtle)]"
           >
             Continue as demo
           </motion.a>
           <motion.a
-            href="/features"
+            href="/demo"
             whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
             transition={springConfig}
-            className="inline-flex h-11 items-center rounded-[var(--button-radius)] px-6 text-[var(--font-body)] font-medium text-[var(--text-secondary)] hover:bg-[var(--brand-primary-muted)] hover:text-[var(--brand-primary)]"
+            className="inline-flex h-11 items-center rounded-[var(--button-radius)] border border-[var(--border-default)] px-6 text-[var(--font-body-sm)] font-medium text-[var(--text-primary)] hover:bg-[var(--surface-sunken)]"
           >
-            See features
+            Request a demo
           </motion.a>
         </div>
         {showDemoLinks && (
@@ -68,14 +65,9 @@ export function HeroSection({
           </p>
         )}
         {tags.length > 0 && (
-          <ul className="mt-6 flex flex-wrap gap-2">
+          <ul className="mt-6 flex flex-wrap gap-x-4 gap-y-1 text-[var(--font-body-sm)] text-[var(--text-tertiary)]">
             {tags.map((tag) => (
-              <li
-                key={tag}
-                className="rounded-[var(--pill-radius)] border border-[var(--border-default)] bg-[var(--surface-sunken)] px-3 py-1 text-[var(--font-caption)] text-[var(--text-secondary)]"
-              >
-                {tag}
-              </li>
+              <li key={tag}>{tag}</li>
             ))}
           </ul>
         )}

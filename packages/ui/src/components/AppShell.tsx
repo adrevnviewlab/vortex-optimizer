@@ -22,7 +22,7 @@ export function AppShell({
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[var(--surface-canvas)]">
+    <div className="min-h-screen bg-[var(--surface-sunken)]">
       <HeaderBar
         onMenuClick={() => setMobileOpen(true)}
         onToggleSidebar={toggle}
@@ -45,8 +45,8 @@ export function AppShell({
             />
             <aside
               className={cn(
-                "fixed inset-y-0 left-0 z-50 flex w-[var(--sidenav-width)] flex-col bg-[var(--surface-raised)]",
-                "border-r border-[var(--border-default)] pt-[env(safe-area-inset-top)] md:hidden"
+                "fixed inset-y-0 left-0 z-50 flex w-[var(--sidenav-width)] flex-col bg-[var(--sidebar-bg)] backdrop-blur-xl",
+                "border-r border-[var(--sidebar-border)] pt-[env(safe-area-inset-top)] md:hidden"
               )}
             >
               <SideNav

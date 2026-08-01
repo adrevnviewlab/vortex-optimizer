@@ -16,9 +16,9 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
         ref={ref}
         className={cn(
           "rounded-[var(--card-radius)] border border-[var(--border-default)]",
-          "bg-[var(--surface-raised)] shadow-[var(--shadow-sm)]",
+          "bg-[var(--surface-raised)] shadow-[var(--shadow-xs)]",
           "transition-[transform,box-shadow] duration-200 ease-[var(--ease-out)]",
-          "hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)]",
+          "hover:-translate-y-0.5 hover:shadow-[var(--shadow-sm)]",
           "motion-reduce:hover:translate-y-0 motion-reduce:hover:shadow-[var(--shadow-sm)]",
           className
         )}
