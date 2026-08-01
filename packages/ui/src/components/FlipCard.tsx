@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "../lib/cn";
 import { Card } from "./Card";
 
@@ -13,6 +13,40 @@ export interface FlipCardProps {
 
 export function FlipCard({ title, description, icon }: FlipCardProps) {
   const [flipped, setFlipped] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
+
+  if (shouldReduceMotion) {
+    return (
+      <div
+        className="h-48 cursor-pointer md:h-52"
+        onClick={() => setFlipped((f) => !f)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setFlipped((f) => !f);
+          }
+        }}
+        role="button"
+        tabIndex={0}
+        aria-pressed={flipped}
+      >
+        <Card className="flex h-full flex-col items-center justify-center text-center hover:translate-y-0">
+          {!flipped ? (
+            <>
+              {icon && (
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--brand-primary-subtle)]">
+                  {icon}
+                </div>
+              )}
+              <h3 className="text-[var(--font-h3)] font-semibold">{title}</h3>
+            </>
+          ) : (
+            <p className="px-4 text-[var(--font-body-sm)] text-[var(--text-secondary)]">{description}</p>
+          )}
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -20,17 +54,26 @@ export function FlipCard({ title, description, icon }: FlipCardProps) {
       onMouseEnter={() => setFlipped(true)}
       onMouseLeave={() => setFlipped(false)}
       onClick={() => setFlipped((f) => !f)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          setFlipped((f) => !f);
+        }
+      }}
+      role="button"
+      tabIndex={0}
+      aria-pressed={flipped}
     >
       <motion.div
         animate={{ rotateY: flipped ? 180 : 0 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        className="relative h-full w-full [transform-style:preserve-3d] motion-reduce:transition-none"
+        className="relative h-full w-full [transform-style:preserve-3d]"
         style={{ transformStyle: "preserve-3d" }}
       >
         <Card
           className={cn(
             "absolute inset-0 flex flex-col items-center justify-center text-center [backface-visibility:hidden]",
-            "hover:translate-y-0 hover:shadow-[var(--shadow-sm)]"
+            "hover:translate-y-0 hover:shadow-[var(--shadow-sm)]",
           )}
         >
           {icon && (
@@ -43,7 +86,7 @@ export function FlipCard({ title, description, icon }: FlipCardProps) {
         <Card
           className={cn(
             "absolute inset-0 flex items-center justify-center p-6 text-center [backface-visibility:hidden]",
-            "hover:translate-y-0 hover:shadow-[var(--shadow-sm)]"
+            "hover:translate-y-0 hover:shadow-[var(--shadow-sm)]",
           )}
           style={{ transform: "rotateY(180deg)" }}
         >

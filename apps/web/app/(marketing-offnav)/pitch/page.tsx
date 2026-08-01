@@ -1,39 +1,39 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { BrandLogo, formatCurrency } from "@vorzop/ui";
+import { BrandLogo, MarketingPrimaryLink, formatCurrency } from "@vorzop/ui";
 
 const SLIDES = [
   {
     title: "Vortex Optimizer",
     subtitle: "Optimize Microsoft licensing. Recover spend.",
-    body: "The consultancy platform for M365 license optimization.",
+    body: "The independent consultancy platform for M365, Azure, and EA optimization — vendor-neutral advisory, not license resale.",
     accent: true,
   },
   {
     title: "The problem",
-    subtitle: "30–40% of M365 spend is wasted",
-    body: "Inactive users, SKU overlap, and premium tier sprawl cost enterprises millions annually. Manual spreadsheet audits can't keep pace.",
+    subtitle: "10–40% of M365 spend is recoverable",
+    body: "Inactive users, SKU overlap, premium tier sprawl, and misaligned EA true-ups cost enterprises millions annually. Spreadsheet audits can't keep pace with tenant complexity.",
   },
   {
     title: "The solution",
     subtitle: "Upload → Analyze → Report",
-    body: "Import tenant data, run our rules engine against 50+ optimization patterns, and deliver client-ready savings reports in hours—not weeks.",
+    body: "Import tenant data, run 50+ optimization patterns, and deliver client-ready savings narratives in hours — as an independent advisor your clients trust.",
   },
   {
     title: "ROI case study",
     subtitle: "Contoso Ltd — $84,200 identified",
-    body: `Annual savings of ${formatCurrency(84200)} from 23 critical findings. 18% reduction in licensing spend with 92% confidence on top recommendations.`,
+    body: `Annual savings of ${formatCurrency(84200)} from 23 critical findings. 18% reduction in licensing spend with 92% confidence on top recommendations. No license resale — pure advisory.`,
   },
   {
     title: "Pricing",
     subtitle: "Simple, transparent USD pricing",
-    body: "Starter $299/mo · Professional $799/mo · Enterprise custom. Regional partners may offer localized pricing.",
+    body: "Starter $299/mo · Professional $799/mo · Enterprise custom · One-time audit $12,500. Regional partners may offer localized pricing.",
   },
   {
     title: "Get started",
     subtitle: "Start your first audit today",
-    body: "Contact sales@vortex.example · Scan QR for demo access",
+    body: "Independent Microsoft licensing optimization — recover spend without changing your CSP relationship.",
     cta: true,
   },
 ];
@@ -47,7 +47,10 @@ export default function PitchPage() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight") go(index + 1);
+      if (e.key === "ArrowRight" || e.key === " ") {
+        e.preventDefault();
+        go(index + 1);
+      }
       if (e.key === "ArrowLeft") go(index - 1);
       if (e.key === "Escape") window.location.href = "/welcome";
     };
@@ -64,26 +67,27 @@ export default function PitchPage() {
       </header>
 
       <main className="flex flex-1 flex-col items-center justify-center px-8 text-center">
-        {slide.accent && (
-          <BrandLogo size="lg" className="mb-8" showWordmark={false} />
-        )}
+        {slide.accent && <BrandLogo size="lg" className="mb-8" showWordmark={false} />}
         <h1
           className="max-w-3xl font-semibold tracking-[var(--tracking-tight)] text-[var(--text-primary)]"
-          style={{ fontFamily: "var(--font-display-family)", fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
+          style={{
+            fontFamily: "var(--font-display-family)",
+            fontSize: "clamp(2rem, 5vw, 3.5rem)",
+          }}
         >
           {slide.title}
         </h1>
         <p className="mt-4 text-xl text-[var(--brand-primary)]">{slide.subtitle}</p>
-        <p className="mt-6 max-w-2xl text-[var(--font-body-lg)] text-[var(--text-secondary)]">
+        <p className="mt-6 max-w-2xl text-[var(--font-body-lg,1rem)] leading-[var(--leading-relaxed)] text-[var(--text-secondary)]">
           {slide.body}
         </p>
         {slide.cta && (
-          <a
-            href="/signup"
-            className="mt-8 inline-flex h-11 items-center rounded-[var(--button-radius)] bg-[var(--brand-primary)] px-6 text-[var(--font-body-sm)] font-medium text-white hover:bg-[var(--brand-primary-hover)]"
-          >
-            Start free audit
-          </a>
+          <div className="mt-8 flex flex-col items-center gap-4">
+            <MarketingPrimaryLink href="/signup">Get Started</MarketingPrimaryLink>
+            <p className="text-[var(--font-caption)] text-[var(--text-tertiary)]">
+              Or visit vortexoptimizer.com/demo for a guided walkthrough
+            </p>
+          </div>
         )}
       </main>
 

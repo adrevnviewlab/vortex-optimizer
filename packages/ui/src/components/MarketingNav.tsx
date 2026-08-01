@@ -7,7 +7,6 @@ export interface MarketingNavProps {
 }
 
 const navLinks = [
-  { href: "/welcome", label: "Home" },
   { href: "/features", label: "Features" },
   { href: "/pricing", label: "Pricing" },
 ];

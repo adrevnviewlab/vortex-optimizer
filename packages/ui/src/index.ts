@@ -16,6 +16,7 @@ export { HeaderBar } from "./components/HeaderBar";
 export { HeroSection } from "./components/HeroSection";
 export { MarketingFooter } from "./components/MarketingFooter";
 export { MarketingNav } from "./components/MarketingNav";
+export { MarketingPrimaryLink } from "./components/MarketingPrimaryLink";
 export { NotificationBell } from "./components/NotificationBell";
 export { PageHeader } from "./components/PageHeader";
 export { PartnerDisclaimer } from "./components/PartnerDisclaimer";
