@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Plus } from "lucide-react";
 import { cn, springConfig } from "../lib/cn";
 
@@ -19,17 +19,21 @@ export function SpringActionButton({
   iconOnly = false,
 }: SpringActionButtonProps) {
   const [tracing, setTracing] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
   const handleClick = () => {
-    setTracing(true);
-    setTimeout(() => setTracing(false), 600);
+    if (!shouldReduceMotion) {
+      setTracing(true);
+      setTimeout(() => setTracing(false), 600);
+    }
     onClick?.();
   };
 
   return (
     <motion.button
       type="button"
-      whileTap={{ scale: 0.96 }}
+      whileHover={shouldReduceMotion ? undefined : { scale: 1.04 }}
+      whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
       transition={springConfig}
       onClick={handleClick}
       className={cn(

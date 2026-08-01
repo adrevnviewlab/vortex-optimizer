@@ -1,7 +1,7 @@
 "use client";
 
+import { useState, forwardRef, type MouseEvent } from "react";
 import { motion, useReducedMotion, type HTMLMotionProps } from "framer-motion";
-import { forwardRef } from "react";
 import { cn, springConfig } from "../lib/cn";
 
 export type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
@@ -38,22 +38,36 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       className,
       children,
       disabled,
+      onClick,
       ...props
     },
     ref
   ) => {
     const shouldReduceMotion = useReducedMotion();
+    const [tracing, setTracing] = useState(false);
+
+    const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+      if (variant === "primary" && !shouldReduceMotion) {
+        setTracing(true);
+        setTimeout(() => setTracing(false), 600);
+      }
+      onClick?.(e);
+    };
 
     return (
       <motion.button
         ref={ref}
+        whileHover={shouldReduceMotion ? undefined : { scale: 1.02 }}
         whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
         transition={springConfig}
+        onClick={handleClick}
         className={cn(
           "inline-flex items-center justify-center gap-2 rounded-[var(--button-radius)] border font-medium",
           "transition-colors duration-[var(--duration-fast)]",
           "disabled:opacity-50 disabled:pointer-events-none",
           "cursor-pointer select-none",
+          variant === "primary" && "spring-action-rainbow",
+          tracing && "is-tracing",
           variantStyles[variant],
           sizeStyles[size],
           className

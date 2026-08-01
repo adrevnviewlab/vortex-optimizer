@@ -1,28 +1,57 @@
 "use client";
 
-import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
-import { cn } from "../lib/cn";
+import {
+  forwardRef,
+  type CSSProperties,
+  type ReactNode,
+} from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { cn, springConfig } from "../lib/cn";
 
-export interface CardProps extends HTMLAttributes<HTMLDivElement> {
+export interface CardProps {
   header?: ReactNode;
   footer?: ReactNode;
   padding?: boolean;
+  className?: string;
+  children?: ReactNode;
+  style?: CSSProperties;
+  onClick?: () => void;
+  /** Spring lift on hover (default true). Disable for flip faces / nested transforms. */
+  hoverLift?: boolean;
 }
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(
-  ({ header, footer, padding = true, className, children, ...props }, ref) => {
+  (
+    {
+      header,
+      footer,
+      padding = true,
+      className,
+      children,
+      style,
+      onClick,
+      hoverLift = true,
+    },
+    ref
+  ) => {
+    const shouldReduceMotion = useReducedMotion();
+
     return (
-      <div
+      <motion.div
         ref={ref}
+        whileHover={
+          shouldReduceMotion || !hoverLift ? undefined : { y: -2 }
+        }
+        transition={springConfig}
+        onClick={onClick}
         className={cn(
           "rounded-[var(--card-radius)] border border-[var(--border-default)]",
           "bg-[var(--surface-raised)] shadow-[var(--shadow-xs)]",
-          "transition-[transform,box-shadow] duration-200 ease-[var(--ease-out)]",
-          "hover:-translate-y-0.5 hover:shadow-[var(--shadow-sm)]",
-          "motion-reduce:hover:translate-y-0 motion-reduce:hover:shadow-[var(--shadow-sm)]",
+          hoverLift && "hover:shadow-[var(--shadow-sm)]",
+          onClick && "cursor-pointer",
           className
         )}
-        {...props}
+        style={style}
       >
         {header && (
           <div className="border-b border-[var(--border-default)] px-4 py-3 font-semibold text-[var(--font-h3)]">
@@ -33,7 +62,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
         {footer && (
           <div className="border-t border-[var(--border-default)] px-4 py-3">{footer}</div>
         )}
-      </div>
+      </motion.div>
     );
   }
 );

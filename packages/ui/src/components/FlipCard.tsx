@@ -15,7 +15,14 @@ export interface FlipCardProps {
 
 export function FlipCard({ title, description, icon, step, badge }: FlipCardProps) {
   const [flipped, setFlipped] = useState(false);
+  const [flicker, setFlicker] = useState(false);
   const shouldReduceMotion = useReducedMotion();
+
+  const triggerFlicker = () => {
+    if (shouldReduceMotion) return;
+    setFlicker(true);
+    setTimeout(() => setFlicker(false), 500);
+  };
 
   if (shouldReduceMotion) {
     return (
@@ -32,7 +39,7 @@ export function FlipCard({ title, description, icon, step, badge }: FlipCardProp
         tabIndex={0}
         aria-pressed={flipped}
       >
-        <Card className="flex h-full flex-col items-center justify-center text-center hover:translate-y-0">
+        <Card className="flex h-full flex-col items-center justify-center text-center" hoverLift={false}>
           {!flipped ? (
             <>
               {icon && (
@@ -64,14 +71,24 @@ export function FlipCard({ title, description, icon, step, badge }: FlipCardProp
 
   return (
     <div
-      className="h-48 cursor-pointer [perspective:1000px] md:h-52"
-      onMouseEnter={() => setFlipped(true)}
+      className={cn(
+        "flip-card-shell h-48 cursor-pointer [perspective:1000px] md:h-52",
+        flicker && "is-flickering",
+      )}
+      onMouseEnter={() => {
+        setFlipped(true);
+        triggerFlicker();
+      }}
       onMouseLeave={() => setFlipped(false)}
-      onClick={() => setFlipped((f) => !f)}
+      onClick={() => {
+        setFlipped((f) => !f);
+        triggerFlicker();
+      }}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
           setFlipped((f) => !f);
+          triggerFlicker();
         }
       }}
       role="button"
@@ -87,8 +104,8 @@ export function FlipCard({ title, description, icon, step, badge }: FlipCardProp
         <Card
           className={cn(
             "absolute inset-0 flex flex-col items-center justify-center text-center [backface-visibility:hidden]",
-            "hover:translate-y-0 hover:shadow-[var(--shadow-sm)]",
           )}
+          hoverLift={false}
         >
           {icon && (
             <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--brand-primary-subtle)]">
@@ -105,8 +122,8 @@ export function FlipCard({ title, description, icon, step, badge }: FlipCardProp
         <Card
           className={cn(
             "absolute inset-0 flex flex-col items-center justify-center p-6 text-center [backface-visibility:hidden]",
-            "hover:translate-y-0 hover:shadow-[var(--shadow-sm)]",
           )}
+          hoverLift={false}
           style={{ transform: "rotateY(180deg)" }}
         >
           {badge && (

@@ -12,9 +12,18 @@ import {
   PageHeader,
   SpringActionButton,
   TextInput,
+  TrafficLight,
   useToast,
+  type RagStatus,
 } from "@vorzop/ui";
 import { fetchMembers, inviteMember, type MemberItem } from "@/lib/api-client";
+
+function memberHealth(lastActive: string): RagStatus {
+  const v = lastActive.toLowerCase();
+  if (v.includes("pending") || v.includes("never")) return "amber";
+  if (v.includes("day") || v.includes("hour") || v.includes("just") || v.includes("min")) return "green";
+  return "green";
+}
 
 export default function AdminPage() {
   const { addToast } = useToast();
@@ -97,6 +106,11 @@ export default function AdminPage() {
               render: (row) => (
                 <span className="text-[var(--text-tertiary)]">{row.lastActive}</span>
               ),
+            },
+            {
+              key: "health",
+              header: "Status",
+              render: (row) => <TrafficLight status={memberHealth(row.lastActive)} />,
             },
           ]}
         />

@@ -23,13 +23,13 @@ export function MarketingFooter() {
             </a>
           </li>
           <li>
-            <a href="/demo" className="text-[var(--font-body-sm)] text-[var(--text-secondary)] hover:text-[var(--brand-primary)]">
-              Contact
+            <a href="/signup" className="text-[var(--font-body-sm)] text-[var(--text-secondary)] hover:text-[var(--brand-primary)]">
+              Get started
             </a>
           </li>
           <li>
-            <a href="/signup" className="text-[var(--font-body-sm)] text-[var(--text-secondary)] hover:text-[var(--brand-primary)]">
-              Get started
+            <a href="/login" className="text-[var(--font-body-sm)] text-[var(--text-secondary)] hover:text-[var(--brand-primary)]">
+              Sign in
             </a>
           </li>
         </ul>

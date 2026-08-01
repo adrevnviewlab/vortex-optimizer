@@ -1,6 +1,6 @@
 "use client";
 
-import type { HTMLAttributes, ReactNode } from "react";
+import type { ReactNode } from "react";
 import { cn } from "../lib/cn";
 import type { RagStatus } from "../lib/cn";
 import { Card } from "./Card";
@@ -17,17 +17,17 @@ const ragBorder: Record<RagStatus, string> = {
   red: "border-[var(--status-red-border)]",
 };
 
-export interface RagCardProps extends HTMLAttributes<HTMLDivElement> {
+export interface RagCardProps {
   status: RagStatus;
   children: ReactNode;
+  className?: string;
 }
 
-export function RagCard({ status, children, className, ...props }: RagCardProps) {
+export function RagCard({ status, children, className }: RagCardProps) {
   return (
     <Card
       padding={false}
-      className={cn("relative overflow-hidden hover:translate-y-0", ragBorder[status], className)}
-      {...props}
+      className={cn("relative overflow-hidden", ragBorder[status], className)}
     >
       <span
         className={cn(

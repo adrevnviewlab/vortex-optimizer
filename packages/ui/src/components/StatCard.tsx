@@ -1,8 +1,8 @@
 "use client";
 
 import type { LucideIcon } from "lucide-react";
-import { cn } from "../lib/cn";
-import { Card } from "./Card";
+import { motion, useReducedMotion } from "framer-motion";
+import { cn, springConfig } from "../lib/cn";
 
 export interface StatCardProps {
   label: string;
@@ -30,10 +30,17 @@ export function StatCard({
   accent = "var(--trace-a)",
   className,
 }: StatCardProps) {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
-    <Card
-      padding={false}
-      className={cn("overflow-hidden hover:translate-y-0 hover:shadow-[var(--shadow-sm)]", className)}
+    <motion.div
+      whileHover={shouldReduceMotion ? undefined : { y: -3, scale: 1.01 }}
+      transition={springConfig}
+      className={cn(
+        "overflow-hidden rounded-[var(--card-radius)] border border-[var(--border-default)]",
+        "bg-[var(--surface-raised)] shadow-[var(--shadow-xs)] hover:shadow-[var(--shadow-sm)]",
+        className,
+      )}
     >
       <div className="h-0.5" style={{ backgroundColor: accent }} />
       <div className="p-4">
@@ -42,7 +49,7 @@ export function StatCard({
             <p className="text-[var(--font-caption)] font-medium uppercase tracking-[var(--tracking-wide)] text-[var(--text-tertiary)]">
               {label}
             </p>
-            <p className="mt-1 text-[1.75rem] font-semibold leading-[var(--leading-tight)] tracking-[var(--tracking-tight)]">
+            <p className="mt-1 text-[1.75rem] font-semibold leading-[var(--leading-tight)] tracking-[var(--tracking-tight)] text-[var(--text-primary)]">
               {value}
             </p>
             {delta && (
@@ -63,6 +70,6 @@ export function StatCard({
           )}
         </div>
       </div>
-    </Card>
+    </motion.div>
   );
 }

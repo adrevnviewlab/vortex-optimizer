@@ -211,7 +211,12 @@ export function PricingTable({
                 </span>
                 {tier.price !== null && (
                   <span className="text-[var(--font-body-sm)] text-[var(--text-tertiary)]">
-                    /{tier.period}
+                    {" "}USD /{tier.period}
+                  </span>
+                )}
+                {tier.price === null && (
+                  <span className="text-[var(--font-body-sm)] text-[var(--text-tertiary)]">
+                    {" "}· USD / regional
                   </span>
                 )}
               </div>

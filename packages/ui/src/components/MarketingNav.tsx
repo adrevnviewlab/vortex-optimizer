@@ -6,11 +6,11 @@ export interface MarketingNavProps {
   currentPath?: string;
 }
 
+/** Pitch and demo stay off header nav (rule §3.22). */
 const navLinks = [
   { href: "/welcome", label: "Home" },
   { href: "/features", label: "Features" },
   { href: "/pricing", label: "Pricing" },
-  { href: "/demo", label: "Contact" },
 ];
 
 const regions = [

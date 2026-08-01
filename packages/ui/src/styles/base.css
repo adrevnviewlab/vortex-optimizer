@@ -107,3 +107,34 @@ body {
     transition: opacity 150ms;
   }
 }
+
+/* Flip-card border flicker on hover/tap */
+@keyframes flip-border-flicker {
+  0%,
+  100% {
+    box-shadow: 0 0 0 1px var(--border-default);
+  }
+  25% {
+    box-shadow: 0 0 0 1.5px var(--brand-primary);
+  }
+  50% {
+    box-shadow: 0 0 0 1px var(--brand-accent);
+  }
+  75% {
+    box-shadow: 0 0 0 1.5px var(--brand-primary);
+  }
+}
+
+.flip-card-shell {
+  border-radius: var(--card-radius);
+}
+
+.flip-card-shell.is-flickering {
+  animation: flip-border-flicker 500ms var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-card-shell.is-flickering {
+    animation: none;
+  }
+}

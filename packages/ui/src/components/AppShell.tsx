@@ -22,7 +22,7 @@ export function AppShell({
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[var(--surface-sunken)]">
+    <div className="min-h-screen bg-[var(--surface-canvas)]">
       <HeaderBar
         onMenuClick={() => setMobileOpen(true)}
         onToggleSidebar={toggle}
@@ -75,7 +75,11 @@ export function AppShell({
         </main>
       </div>
 
-      <FloatingDock currentPath={currentPath} />
+      <FloatingDock
+        currentPath={currentPath}
+        showAdmin={showAdmin}
+        sidenavCollapsed={collapsed}
+      />
     </div>
   );
 }

@@ -18,7 +18,8 @@ export function ChartCard({ title, children, action }: ChartCardProps) {
           {action}
         </div>
       }
-      className="hover:translate-y-0 hover:shadow-[var(--shadow-sm)]"
+      className="hover:shadow-[var(--shadow-sm)]"
+      hoverLift={false}
     >
       <div className="h-64">{children}</div>
     </Card>
