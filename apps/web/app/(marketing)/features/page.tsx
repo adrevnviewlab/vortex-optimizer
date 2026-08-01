@@ -1,13 +1,21 @@
 import type { Metadata } from "next";
 import {
+  Building2,
   CloudUpload,
   FileOutput,
   Globe,
+  HeartPulse,
+  Landmark,
   Lightbulb,
   ScanSearch,
   ShieldCheck,
 } from "lucide-react";
-import { FlipCard, MarketingPrimaryLink } from "@vorzop/ui";
+import {
+  FlipCard,
+  MarketingCtaBand,
+  MarketingPrimaryLink,
+  SectionHeader,
+} from "@vorzop/ui";
 
 export const metadata: Metadata = {
   title: "Features — Vortex Optimizer",
@@ -50,6 +58,79 @@ const features = [
     title: "Client portal",
     description:
       "Read-only stakeholder access to review findings, approve recommendations, and track implementation progress.",
+    icon: <Globe size={20} className="text-[var(--brand-primary)]" />,
+  },
+];
+
+const featureDetails = [
+  {
+    title: "Audit intake & normalization",
+    subtitle: "Upload · mapping · validation",
+    bullets: [
+      "CSV and Excel from M365 admin center, Azure, Entra ID",
+      "Automatic SKU normalization across EA, CSP, and direct",
+      "Field mapping wizard for non-standard exports",
+      "Vendor-neutral — no CSP or reseller integration required",
+    ],
+    icon: <CloudUpload size={20} className="text-[var(--brand-primary)]" />,
+  },
+  {
+    title: "Rules & savings engine",
+    subtitle: "50+ patterns · confidence scores",
+    bullets: [
+      "Inactive user reclamation and E5 vs E3 right-sizing",
+      "Teams add-ons, Azure hybrid benefits, EA true-up alignment",
+      "Dollar impact ranked by confidence and implementation effort",
+      "Typical 10–40% recoverable spend identification",
+    ],
+    icon: <Lightbulb size={20} className="text-[var(--brand-primary)]" />,
+  },
+  {
+    title: "Compliance & reporting",
+    subtitle: "RAG signals · executive PDF",
+    bullets: [
+      "Traffic-light health for overspend and compliance risk",
+      "Board-ready executive summaries with savings narrative",
+      "Client portal for stakeholder review and approval",
+      "Independent advisory language — not license resale quotes",
+    ],
+    icon: <ShieldCheck size={20} className="text-[var(--brand-primary)]" />,
+  },
+];
+
+const comparisonRows = [
+  { label: "SKU normalization", spreadsheet: false, vortex: true },
+  { label: "50+ optimization rules", spreadsheet: false, vortex: true },
+  { label: "Confidence-scored findings", spreadsheet: false, vortex: true },
+  { label: "Traffic-light RAG health", spreadsheet: false, vortex: true },
+  { label: "Executive PDF export", spreadsheet: "Manual", vortex: "One click" },
+  { label: "Client portal access", spreadsheet: false, vortex: true },
+  { label: "Renewal tracking", spreadsheet: "Ad hoc", vortex: "Built-in" },
+];
+
+const industries = [
+  {
+    title: "Healthcare",
+    description:
+      "HIPAA-sensitive tenants with strict compliance requirements. Right-size E5 security SKUs, reclaim inactive clinical licenses, and align EA true-ups before renewal.",
+    icon: <HeartPulse size={20} className="text-[var(--brand-primary)]" />,
+  },
+  {
+    title: "Financial services",
+    description:
+      "Regulated environments with premium tier sprawl. Audit Teams Phone, Power Platform, and Azure spend alongside M365 — vendor-neutral advisory for procurement.",
+    icon: <Landmark size={20} className="text-[var(--brand-primary)]" />,
+  },
+  {
+    title: "Manufacturing",
+    description:
+      "Distributed workforces with mixed E3/E5 and frontline worker licenses. Identify overlap between F3, E3, and Teams Essentials across plants and offices.",
+    icon: <Building2 size={20} className="text-[var(--brand-primary)]" />,
+  },
+  {
+    title: "Professional services",
+    description:
+      "Project-based billing and variable headcount. Reclaim licenses from departed consultants and right-size premium add-ons between engagement cycles.",
     icon: <Globe size={20} className="text-[var(--brand-primary)]" />,
   },
 ];
@@ -162,10 +243,47 @@ export default function FeaturesPage() {
         </p>
       </section>
 
-      <section className="mx-auto grid max-w-[var(--content-max-width)] grid-cols-1 gap-6 px-4 pb-20 md:grid-cols-2 md:px-6 lg:grid-cols-3">
+      <section className="mx-auto grid max-w-[var(--content-max-width)] grid-cols-1 gap-6 px-4 pb-12 md:grid-cols-2 md:px-6 lg:grid-cols-3">
         {features.map((f) => (
           <FlipCard key={f.title} title={f.title} description={f.description} icon={f.icon} />
         ))}
+      </section>
+
+      <section className="bg-[var(--surface-sunken)] py-16 md:py-24">
+        <div className="mx-auto max-w-[var(--content-max-width)] px-4 md:px-6">
+          <SectionHeader
+            title="Deep-dive modules"
+            description="Each module includes the full workflow — not add-on upsells. Built for independent advisors running Microsoft licensing engagements."
+          />
+          <div className="grid gap-8 md:grid-cols-3">
+            {featureDetails.map((detail) => (
+              <div
+                key={detail.title}
+                className="rounded-[var(--card-radius)] border border-[var(--border-default)] bg-[var(--surface-raised)] p-6 shadow-[var(--shadow-sm)]"
+              >
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--brand-primary-subtle)]">
+                  {detail.icon}
+                </div>
+                <h3 className="text-[var(--font-h3)] font-semibold">{detail.title}</h3>
+                <p className="mt-1 text-[var(--font-caption)] text-[var(--text-tertiary)]">{detail.subtitle}</p>
+                <p className="mt-4 text-[var(--font-body-sm)] font-medium text-[var(--text-secondary)]">
+                  What&apos;s included
+                </p>
+                <ul className="mt-2 space-y-2">
+                  {detail.bullets.map((bullet) => (
+                    <li
+                      key={bullet}
+                      className="flex items-start gap-2 text-[var(--font-body-sm)] text-[var(--text-secondary)]"
+                    >
+                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--brand-primary)]" />
+                      {bullet}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {deepDives.map((section) => (
@@ -199,7 +317,64 @@ export default function FeaturesPage() {
         </section>
       ))}
 
-      <section className="mx-auto max-w-[var(--content-max-width)] px-4 pb-24 md:px-6">
+      <section className="mx-auto max-w-[var(--content-max-width)] px-4 py-16 md:px-6">
+        <SectionHeader
+          title="Spreadsheet vs Vortex"
+          description="Why independent advisors move beyond Excel for Microsoft licensing optimization."
+        />
+        <div className="overflow-x-auto rounded-[var(--card-radius)] border border-[var(--border-default)]">
+          <table className="w-full min-w-[480px] border-collapse text-left">
+            <thead>
+              <tr className="border-b border-[var(--border-default)] bg-[var(--surface-sunken)]">
+                <th className="px-4 py-3 text-[var(--font-body-sm)] font-semibold">Capability</th>
+                <th className="px-4 py-3 text-[var(--font-body-sm)] font-semibold">Spreadsheet audit</th>
+                <th className="px-4 py-3 text-[var(--font-body-sm)] font-semibold text-[var(--brand-primary)]">
+                  Vortex Optimizer
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {comparisonRows.map((row) => (
+                <tr key={row.label} className="border-b border-[var(--border-default)] last:border-0">
+                  <td className="px-4 py-3 text-[var(--font-body-sm)] font-medium">{row.label}</td>
+                  <td className="px-4 py-3 text-center text-[var(--font-body-sm)] text-[var(--text-secondary)]">
+                    {typeof row.spreadsheet === "boolean"
+                      ? row.spreadsheet
+                        ? "✓"
+                        : "—"
+                      : row.spreadsheet}
+                  </td>
+                  <td className="bg-[var(--brand-primary-muted)]/30 px-4 py-3 text-center text-[var(--font-body-sm)] font-medium">
+                    {typeof row.vortex === "boolean" ? (row.vortex ? "✓" : "—") : row.vortex}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section className="bg-[var(--surface-sunken)] py-16 md:py-24">
+        <div className="mx-auto max-w-[var(--content-max-width)] px-4 md:px-6">
+          <SectionHeader
+            title="Use cases by industry"
+            description="Microsoft licensing complexity varies by sector. Vortex adapts rules and reporting for common vertical patterns."
+          />
+          <div className="grid gap-6 md:grid-cols-2">
+            {industries.map((industry) => (
+              <FlipCard
+                key={industry.title}
+                title={industry.title}
+                description={industry.description}
+                icon={industry.icon}
+                badge="Industry"
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[var(--content-max-width)] px-4 pb-8 md:px-6">
         <div className="rounded-[var(--card-radius)] border border-[var(--border-default)] bg-[var(--surface-raised)] p-8 text-center shadow-[var(--shadow-sm)]">
           <h2 className="text-[var(--font-h2)] font-semibold">Ready to recover licensing spend?</h2>
           <p className="mt-2 text-[var(--font-body-sm)] text-[var(--text-secondary)]">
@@ -210,6 +385,15 @@ export default function FeaturesPage() {
           </div>
         </div>
       </section>
+
+      <MarketingCtaBand
+        title="Try it on sample data first"
+        description="Explore the Contoso Ltd demo walkthrough — no signup required."
+        primaryHref="/demo"
+        primaryLabel="See the walkthrough"
+        secondaryHref="/signup"
+        secondaryLabel="Get started"
+      />
     </>
   );
 }

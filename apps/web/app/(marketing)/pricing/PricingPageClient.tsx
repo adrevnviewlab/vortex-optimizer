@@ -1,7 +1,16 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { PartnerDisclaimer, PricingTable, useToast } from "@vorzop/ui";
+import {
+  Card,
+  MarketingCtaBand,
+  PartnerDisclaimer,
+  PricingComparisonTable,
+  PricingTable,
+  RoiCalculator,
+  SectionHeader,
+  useToast,
+} from "@vorzop/ui";
 import {
   createBillingCheckout,
   fetchBillingStatus,
@@ -31,6 +40,44 @@ const FAQ = [
   {
     q: "What about non-US clients?",
     a: "USD is our list price. Regional partners may offer localized pricing and billing — see the partner disclaimer below.",
+  },
+  {
+    q: "Is there a low-commitment way to start?",
+    a: "Yes — the one-time audit engagement ($12,500) is ideal for validating the platform on a single client before a SaaS subscription.",
+  },
+  {
+    q: "Can we change plans later?",
+    a: "Yes. Move from Starter to Professional, or into Enterprise, as your practice grows. Contact us to align commercial terms.",
+  },
+  {
+    q: "Do we pay per seat or per module?",
+    a: "No. SaaS pricing is per advisory firm with tiered client org limits — the full platform is included for your practice.",
+  },
+];
+
+const comparisonRows = [
+  { feature: "Client orgs", starter: "Up to 5", professional: "Unlimited", enterprise: "Unlimited" },
+  { feature: "Rules engine", starter: "Core rules", professional: "Advanced rules", enterprise: "Custom rules" },
+  { feature: "Executive PDF export", starter: true, professional: true, enterprise: true },
+  { feature: "Client portal", starter: false, professional: true, enterprise: true },
+  { feature: "Portfolio view", starter: false, professional: false, enterprise: true },
+  { feature: "SSO + advanced RBAC", starter: false, professional: false, enterprise: true },
+  { feature: "Dedicated success manager", starter: false, professional: false, enterprise: true },
+  { feature: "Priority support", starter: false, professional: true, enterprise: true },
+];
+
+const includedEverywhere = [
+  {
+    title: "Vendor-neutral advisory",
+    description: "Independent optimization — no license resale, no CSP lock-in.",
+  },
+  {
+    title: "Traffic-light RAG health",
+    description: "Compliance and savings signals your clients can act on before renewal.",
+  },
+  {
+    title: "Microsoft licensing focus",
+    description: "M365, Azure, EA, and CSP patterns — not a generic SAM tool.",
   },
 ];
 
@@ -72,6 +119,9 @@ export default function PricingPageClient() {
   return (
     <section className="mx-auto max-w-[var(--content-max-width)] px-4 py-16 md:px-6">
       <div className="mb-12 text-center">
+        <p className="mb-2 text-[var(--font-caption)] font-medium uppercase tracking-[var(--tracking-wide)] text-[var(--brand-primary)]">
+          Simple, transparent pricing
+        </p>
         <h1
           className="font-semibold tracking-[var(--tracking-tight)]"
           style={{
@@ -79,11 +129,11 @@ export default function PricingPageClient() {
             fontSize: "var(--font-h1)",
           }}
         >
-          Simple, transparent pricing
+          Always know what your practice costs
         </h1>
-        <p className="mt-3 text-[var(--font-body)] text-[var(--text-secondary)]">
-          All prices in USD. SaaS subscriptions for ongoing advisory — or a one-time audit for project-based
-          engagements.
+        <p className="mx-auto mt-3 max-w-xl text-[var(--font-body)] text-[var(--text-secondary)]">
+          Pay for the advisory platform you run — not per seat, not per module. Monthly USD list prices below;
+          regional packaging available on request.
         </p>
       </div>
 
@@ -92,10 +142,35 @@ export default function PricingPageClient() {
         onCheckout={handleCheckout}
         checkoutLoading={checkoutLoading}
       />
+
+      <PricingComparisonTable rows={comparisonRows} />
+
+      <section className="mt-16">
+        <SectionHeader
+          title="What every plan gets"
+          description="You are not buying add-ons to run a normal licensing audit. These come with the platform."
+        />
+        <div className="grid gap-6 md:grid-cols-3">
+          {includedEverywhere.map((item) => (
+            <Card key={item.title} className="hover:translate-y-0">
+              <h3 className="text-[var(--font-h3)] font-semibold">{item.title}</h3>
+              <p className="mt-2 text-[var(--font-body-sm)] text-[var(--text-secondary)]">
+                {item.description}
+              </p>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      <RoiCalculator />
+
       <PartnerDisclaimer />
 
       <div className="mt-16">
-        <h2 className="mb-6 text-center text-[var(--font-h2)] font-semibold">FAQ</h2>
+        <SectionHeader
+          title="Common questions"
+          description="Short answers for IT and finance buyers. Prefer a walkthrough? Try the demo."
+        />
         <div className="mx-auto max-w-2xl space-y-4">
           {FAQ.map((item) => (
             <details
@@ -108,6 +183,16 @@ export default function PricingPageClient() {
           ))}
         </div>
       </div>
+
+      <MarketingCtaBand
+        title="Ready to price your practice?"
+        description="Start a trial for your advisory firm, or explore the demo walkthrough with seeded Contoso Ltd data."
+        primaryHref="/signup"
+        primaryLabel="Get started"
+        secondaryHref="/demo"
+        secondaryLabel="See the walkthrough"
+        disclaimer="USD list prices — regional partners may offer localized pricing."
+      />
     </section>
   );
 }

@@ -11,19 +11,70 @@ const SLIDES = [
     accent: true,
   },
   {
+    title: "Buyers who run licensing audits",
+    subtitle: "IT leaders · finance · PE portfolios",
+    body: "Mid-market IT teams billing M365 renewals, finance leaders chasing spend visibility, and PE-backed portfolios managing Microsoft spend across holdings.",
+    bullets: [
+      "IT directors preparing EA or CSP renewals",
+      "Finance leaders evaluating IT spend before board review",
+      "PE portfolio ops managing Microsoft across holdings",
+    ],
+  },
+  {
     title: "The problem",
     subtitle: "10–40% of M365 spend is recoverable",
     body: "Inactive users, SKU overlap, premium tier sprawl, and misaligned EA true-ups cost enterprises millions annually. Spreadsheet audits can't keep pace with tenant complexity.",
+    bullets: [
+      "Invoice cycles live in Excel, findings scatter across email",
+      "Aging inactive licenses reconstructed late each renewal",
+      "Nobody sees who has what until procurement asks",
+    ],
+  },
+  {
+    title: "Spreadsheet ops still run the audit",
+    subtitle: "Pain points advisors inherit",
+    body: "Independent consultants inherit clients whose licensing truth lives in five exports and a shared drive folder. The pain shows up as late findings, renewal surprises, and board packs that take a weekend.",
+    bullets: [
+      "SKU normalization done manually every engagement",
+      "No confidence scores — just gut feel on savings",
+      "Executive narrative rebuilt from scratch each time",
+    ],
+  },
+  {
+    title: "One platform for the licensing day",
+    subtitle: "Problem → solution → product",
+    body: "Give advisors, finance, and client stakeholders the same operational picture — scoped per client org. Savings stay ranked by confidence. RAG health replaces end-of-quarter surprises.",
+    bullets: [
+      "01 Scope everything to one client org per audit",
+      "02 Keep SKU inventory clear by design",
+      "03 Connect findings to executive narrative",
+      "04 Surface savings before renewal escalates",
+    ],
   },
   {
     title: "The solution",
     subtitle: "Upload → Analyze → Report",
     body: "Import tenant data, run 50+ optimization patterns, and deliver client-ready savings narratives in hours — as an independent advisor your clients trust.",
+    bullets: [
+      "Vendor-neutral intake — no CSP integration",
+      "Traffic-light RAG for compliance and overspend",
+      "Board-ready PDF from the same data as the dashboard",
+    ],
   },
   {
     title: "ROI case study",
     subtitle: "Contoso Ltd — $84,200 identified",
     body: `Annual savings of ${formatCurrency(84200)} from 23 critical findings. 18% reduction in licensing spend with 92% confidence on top recommendations. No license resale — pure advisory.`,
+  },
+  {
+    title: "Product pillars",
+    subtitle: "Vortex Optimizer — licensing advisory console",
+    body: "A focused console for independent Microsoft licensing advisors. Not a marketplace. Not a CSP portal. The software your team opens when they start an audit.",
+    bullets: [
+      "One client org — tenant isolation per engagement",
+      "Audit workflows — intake, rules, RAG, reports",
+      "Client portal — stakeholders review and approve",
+    ],
   },
   {
     title: "Pricing",
@@ -68,6 +119,9 @@ export default function PitchPage() {
 
       <main className="flex flex-1 flex-col items-center justify-center px-8 text-center">
         {slide.accent && <BrandLogo size="lg" className="mb-8" showWordmark={false} />}
+        <p className="mb-2 text-[var(--font-caption)] font-medium uppercase tracking-[var(--tracking-wide)] text-[var(--brand-primary)]">
+          Buyer pitch · Microsoft licensing
+        </p>
         <h1
           className="max-w-3xl font-semibold tracking-[var(--tracking-tight)] text-[var(--text-primary)]"
           style={{
@@ -81,11 +135,28 @@ export default function PitchPage() {
         <p className="mt-6 max-w-2xl text-[var(--font-body-lg,1rem)] leading-[var(--leading-relaxed)] text-[var(--text-secondary)]">
           {slide.body}
         </p>
+        {"bullets" in slide && slide.bullets && (
+          <ul className="mt-6 max-w-xl space-y-2 text-left">
+            {slide.bullets.map((bullet) => (
+              <li
+                key={bullet}
+                className="flex items-start gap-2 text-[var(--font-body-sm)] text-[var(--text-secondary)]"
+              >
+                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--brand-primary)]" />
+                {bullet}
+              </li>
+            ))}
+          </ul>
+        )}
         {slide.cta && (
           <div className="mt-8 flex flex-col items-center gap-4">
             <MarketingPrimaryLink href="/signup">Get Started</MarketingPrimaryLink>
             <p className="text-[var(--font-caption)] text-[var(--text-tertiary)]">
-              Or visit vortexoptimizer.com/demo for a guided walkthrough
+              Or visit{" "}
+              <a href="/demo" className="text-[var(--brand-primary)] hover:underline">
+                /demo
+              </a>{" "}
+              for a guided walkthrough
             </p>
           </div>
         )}

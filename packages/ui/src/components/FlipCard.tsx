@@ -9,9 +9,11 @@ export interface FlipCardProps {
   title: string;
   description: string;
   icon?: React.ReactNode;
+  step?: string;
+  badge?: string;
 }
 
-export function FlipCard({ title, description, icon }: FlipCardProps) {
+export function FlipCard({ title, description, icon, step, badge }: FlipCardProps) {
   const [flipped, setFlipped] = useState(false);
   const shouldReduceMotion = useReducedMotion();
 
@@ -38,10 +40,22 @@ export function FlipCard({ title, description, icon }: FlipCardProps) {
                   {icon}
                 </div>
               )}
+              {step && (
+                <p className="mb-2 text-[var(--font-caption)] font-semibold text-[var(--brand-primary)]">
+                  {step}
+                </p>
+              )}
               <h3 className="text-[var(--font-h3)] font-semibold">{title}</h3>
             </>
           ) : (
-            <p className="px-4 text-[var(--font-body-sm)] text-[var(--text-secondary)]">{description}</p>
+            <>
+              {badge && (
+                <p className="mb-2 text-[var(--font-caption)] font-medium uppercase tracking-[var(--tracking-wide)] text-[var(--text-tertiary)]">
+                  {badge}
+                </p>
+              )}
+              <p className="px-4 text-[var(--font-body-sm)] text-[var(--text-secondary)]">{description}</p>
+            </>
           )}
         </Card>
       </div>
@@ -81,15 +95,30 @@ export function FlipCard({ title, description, icon }: FlipCardProps) {
               {icon}
             </div>
           )}
+          {step && (
+            <p className="mb-2 text-[var(--font-caption)] font-semibold text-[var(--brand-primary)]">
+              {step}
+            </p>
+          )}
+          {step && (
+            <p className="mb-2 text-[var(--font-caption)] font-semibold text-[var(--brand-primary)]">
+              {step}
+            </p>
+          )}
           <h3 className="text-[var(--font-h3)] font-semibold">{title}</h3>
         </Card>
         <Card
           className={cn(
-            "absolute inset-0 flex items-center justify-center p-6 text-center [backface-visibility:hidden]",
+            "absolute inset-0 flex flex-col items-center justify-center p-6 text-center [backface-visibility:hidden]",
             "hover:translate-y-0 hover:shadow-[var(--shadow-sm)]",
           )}
           style={{ transform: "rotateY(180deg)" }}
         >
+          {badge && (
+            <p className="mb-2 text-[var(--font-caption)] font-medium uppercase tracking-[var(--tracking-wide)] text-[var(--text-tertiary)]">
+              {badge}
+            </p>
+          )}
           <p className="text-[var(--font-body-sm)] text-[var(--text-secondary)]">{description}</p>
         </Card>
       </motion.div>
