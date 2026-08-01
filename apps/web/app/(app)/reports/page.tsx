@@ -98,32 +98,35 @@ export default function ReportsPage() {
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {reports.map((report) => (
-          <Card key={report.id} className="hover:translate-y-0">
-            <div className="flex h-32 items-center justify-center rounded-lg bg-[var(--surface-sunken)]">
-              <FileText size={40} className="text-[var(--text-tertiary)]" strokeWidth={1.5} />
+          <Card key={report.id} className="hover:translate-y-0" padding={false}>
+            <div className="flex h-32 items-center justify-center rounded-t-[var(--card-radius)] bg-[var(--surface-sunken)]">
+              <FileText size={40} className="text-[var(--brand-primary)]" strokeWidth={1.5} />
             </div>
-            <h3 className="mt-3 text-[var(--font-h3)] font-semibold">{report.client}</h3>
-            <p className="text-[var(--font-body-sm)] text-[var(--text-secondary)]">
-              {report.type} · {report.date}
-            </p>
-            <div className="mt-2 flex items-center gap-2">
-              <Badge variant={report.status === "complete" ? "success" : "info"}>
-                {report.status}
-              </Badge>
+            <div className="p-4">
+              <h3 className="text-[var(--font-h3)] font-semibold">{report.client}</h3>
+              <p className="text-[var(--font-body-sm)] text-[var(--text-secondary)]">
+                {report.type} · {report.date}
+              </p>
+              <div className="mt-2 flex items-center gap-2">
+                <Badge variant={report.status === "complete" ? "success" : "info"}>
+                  {report.status}
+                </Badge>
+              </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                disabled={downloadingId === report.id}
+                onClick={() => handleDownload(report)}
+                className="mt-3 px-0"
+              >
+                {downloadingId === report.id ? (
+                  <Loader2 size={14} className="animate-spin" />
+                ) : (
+                  <Download size={14} />
+                )}
+                Download
+              </Button>
             </div>
-            <button
-              type="button"
-              disabled={downloadingId === report.id}
-              onClick={() => handleDownload(report)}
-              className="mt-3 inline-flex items-center gap-1.5 text-[var(--font-body-sm)] text-[var(--brand-primary)] hover:underline disabled:opacity-50"
-            >
-              {downloadingId === report.id ? (
-                <Loader2 size={14} className="animate-spin" />
-              ) : (
-                <Download size={14} />
-              )}
-              Download
-            </button>
           </Card>
         ))}
       </div>
@@ -150,7 +153,7 @@ export default function ReportsPage() {
             <select
               value={selectedAudit}
               onChange={(e) => setSelectedAudit(e.target.value)}
-              className="h-10 w-full rounded-[var(--input-radius)] border border-[var(--border-default)] bg-[var(--surface-sunken)] px-3 text-[var(--font-body-sm)]"
+              className="h-10 w-full rounded-[var(--input-radius)] border border-[var(--border-default)] bg-[var(--surface-sunken)] px-3 text-[var(--font-body-sm)] focus:border-[var(--brand-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary-muted)]"
             >
               {audits.map((a) => (
                 <option key={a.id} value={a.id}>

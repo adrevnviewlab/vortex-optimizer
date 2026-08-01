@@ -31,6 +31,10 @@ export { Skeleton, StatCardSkeleton, TableRowSkeleton, ListPageSkeleton, CardGri
 export { Tabs } from "./components/Tabs";
 export type { TabItem, TabsProps } from "./components/Tabs";
 export { FileUpload } from "./components/FileUpload";
+export { FilterPills } from "./components/FilterPills";
+export type { FilterPillOption, FilterPillsProps } from "./components/FilterPills";
+export { RagCard } from "./components/RagCard";
+export type { RagCardProps } from "./components/RagCard";
 export { Toggle } from "./components/Toggle";
 export { OnboardingChecklist } from "./components/OnboardingChecklist";
 export type { ChecklistItem } from "./components/OnboardingChecklist";

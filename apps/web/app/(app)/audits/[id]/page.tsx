@@ -15,7 +15,7 @@ import {
   StatCardSkeleton,
   useToast,
 } from "@vorzop/ui";
-import { Check, Loader2, Upload } from "lucide-react";
+import { Check, Loader2, ScanSearch, TrendingDown, Upload, AlertTriangle } from "lucide-react";
 import {
   analyzeAudit,
   DEMO_CONTOSO_AUDIT_ID,
@@ -148,7 +148,7 @@ export default function AuditDetailPage() {
         }
       />
 
-      <Card className="mb-6">
+      <Card header="Audit progress" className="mb-6">
         <div className="flex flex-wrap items-center justify-between gap-4">
           {STEPS.map((step, i) => (
             <div key={step.id} className="flex flex-1 min-w-[100px] items-center gap-2">
@@ -183,9 +183,9 @@ export default function AuditDetailPage() {
       </Card>
 
       <div className="mb-6 grid gap-4 sm:grid-cols-3">
-        <StatCard label="SKUs scanned" value={licenseCount} />
-        <StatCard label="Issues found" value={findingsCount} />
-        <StatCard label="Savings identified" value={formatCurrency(savings)} />
+        <StatCard label="SKUs scanned" value={licenseCount} icon={ScanSearch} accent="var(--trace-a)" />
+        <StatCard label="Issues found" value={findingsCount} icon={AlertTriangle} accent="var(--trace-d)" />
+        <StatCard label="Savings identified" value={formatCurrency(savings)} icon={TrendingDown} accent="var(--trace-c)" />
       </div>
 
       <div className="flex flex-wrap gap-2">

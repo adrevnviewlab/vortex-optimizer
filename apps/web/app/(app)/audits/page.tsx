@@ -36,17 +36,34 @@ export default function AuditsPage() {
     <>
       <PageHeader
         title="Audits"
-        actions={<SpringActionButton label="New Audit" />}
+        actions={
+          <SpringActionButton
+            label="New Audit"
+            onClick={() => router.push("/clients")}
+          />
+        }
       />
 
-      <Card>
+      <Card header="All audits">
         <DataTable
           data={audits}
           onRowClick={(row) => {
             router.push(`/audits/${row.id}`);
           }}
           columns={[
-            { key: "client", header: "Client", sortable: true },
+            {
+              key: "client",
+              header: "Client",
+              sortable: true,
+              render: (row) => (
+                <span className="flex items-center gap-2">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[var(--brand-primary-subtle)] text-[var(--font-caption)] font-semibold text-[var(--brand-primary)]">
+                    {row.client.split(" ").map((w: string) => w[0]).join("").slice(0, 2)}
+                  </span>
+                  {row.client}
+                </span>
+              ),
+            },
             { key: "date", header: "Audit date", sortable: true },
             { key: "skus", header: "SKUs scanned", sortable: true },
             {

@@ -5,6 +5,7 @@ import {
   Badge,
   Button,
   Card,
+  DataTable,
   Dialog,
   DialogContent,
   ListPageSkeleton,
@@ -73,36 +74,32 @@ export default function AdminPage() {
       />
 
       <Card header="Users">
-        <table className="w-full">
-          <thead>
-            <tr className="border-b border-[var(--border-strong)]">
-              {["Name", "Email", "Role", "Last active"].map((h) => (
-                <th
-                  key={h}
-                  className="px-4 py-3 text-left text-[var(--font-caption)] font-medium uppercase tracking-[var(--tracking-wide)] text-[var(--text-secondary)]"
-                >
-                  {h}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {members.map((user) => (
-              <tr key={user.id} className="border-b border-[var(--border-default)]">
-                <td className="px-4 py-3 text-[var(--font-body-sm)]">{user.name}</td>
-                <td className="px-4 py-3 text-[var(--font-body-sm)] text-[var(--text-secondary)]">
-                  {user.email}
-                </td>
-                <td className="px-4 py-3">
-                  <Badge variant="brand">{user.role}</Badge>
-                </td>
-                <td className="px-4 py-3 text-[var(--font-body-sm)] text-[var(--text-tertiary)]">
-                  {user.lastActive}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <DataTable
+          data={members}
+          columns={[
+            { key: "name", header: "Name", sortable: true },
+            {
+              key: "email",
+              header: "Email",
+              sortable: true,
+              render: (row) => (
+                <span className="text-[var(--text-secondary)]">{row.email}</span>
+              ),
+            },
+            {
+              key: "role",
+              header: "Role",
+              render: (row) => <Badge variant="brand">{row.role}</Badge>,
+            },
+            {
+              key: "lastActive",
+              header: "Last active",
+              render: (row) => (
+                <span className="text-[var(--text-tertiary)]">{row.lastActive}</span>
+              ),
+            },
+          ]}
+        />
       </Card>
 
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
@@ -114,7 +111,7 @@ export default function AdminPage() {
               <Button variant="ghost" onClick={() => setDialogOpen(false)}>
                 Cancel
               </Button>
-              <Button onClick={handleInvite} disabled={!email.trim() || inviting}>
+              <Button onClick={handleInvite} disabled={!email.trim() || inviting} isLoading={inviting}>
                 Send invite
               </Button>
             </>
@@ -135,7 +132,7 @@ export default function AdminPage() {
               <select
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
-                className="h-10 w-full rounded-[var(--input-radius)] border border-[var(--border-default)] bg-[var(--surface-sunken)] px-3 text-[var(--font-body-sm)]"
+                className="h-10 w-full rounded-[var(--input-radius)] border border-[var(--border-default)] bg-[var(--surface-sunken)] px-3 text-[var(--font-body-sm)] focus:border-[var(--brand-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary-muted)]"
               >
                 <option value="admin">Admin</option>
                 <option value="analyst">Consultant</option>

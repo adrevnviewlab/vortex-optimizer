@@ -9,7 +9,7 @@ export interface AuthLayoutProps {
 
 export function AuthLayout({ title, subtitle, children }: AuthLayoutProps) {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-[var(--surface-canvas)] px-4 py-12">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-[var(--surface-sunken)] px-4 py-12">
       <div className="mb-8">
         <BrandLogo size="lg" href="/welcome" />
       </div>

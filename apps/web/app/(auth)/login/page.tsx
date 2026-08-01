@@ -38,7 +38,7 @@ function LoginForm() {
   }
 
   return (
-    <AuthLayout title="Sign in" subtitle="Welcome back to Vortex Optimizer">
+    <AuthLayout title="Sign in" subtitle="One tenant. One optimization workspace.">
       <form className="space-y-4" onSubmit={handleSubmit}>
         <TextInput
           label="Email"
@@ -61,7 +61,7 @@ function LoginForm() {
         {error && (
           <p className="text-[var(--font-body-sm)] text-[var(--status-danger)]">{error}</p>
         )}
-        <Button type="submit" variant="primary" className="w-full" disabled={loading}>
+        <Button type="submit" variant="primary" className="w-full spring-press" disabled={loading}>
           {loading ? "Signing in…" : "Sign in"}
         </Button>
         <Button type="button" variant="secondary" className="w-full" disabled>

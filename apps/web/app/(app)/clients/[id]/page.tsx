@@ -73,17 +73,19 @@ export default function ClientDetailPage() {
       />
 
       <div className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard label="Total licenses" value={client.totalLicenses} icon={Users} />
+        <StatCard label="Total licenses" value={client.totalLicenses} icon={Users} accent="var(--trace-a)" />
         <StatCard
           label="Monthly spend"
           value={formatCurrency(client.monthlySpend)}
           icon={Building2}
+          accent="var(--trace-b)"
         />
         <StatCard
           label="Potential savings"
           value={formatCurrency(client.potentialSavings)}
           deltaTone="positive"
           icon={TrendingDown}
+          accent="var(--status-brass)"
         />
         <StatCard
           label="Compliance score"
@@ -91,6 +93,7 @@ export default function ClientDetailPage() {
           delta={client.complianceScore < 90 ? "Below target" : undefined}
           deltaTone={client.complianceScore < 90 ? "warning" : "positive"}
           icon={ShieldCheck}
+          accent="var(--trace-c)"
         />
       </div>
 

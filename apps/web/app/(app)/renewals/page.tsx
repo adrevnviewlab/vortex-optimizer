@@ -6,6 +6,7 @@ import {
   Card,
   computeTrafficLight,
   DataTable,
+  FilterPills,
   formatCurrency,
   ListPageSkeleton,
   PageHeader,
@@ -34,27 +35,19 @@ export default function RenewalsPage() {
       <PageHeader
         title="Renewals"
         actions={
-          <div className="flex rounded-[var(--button-radius)] border border-[var(--border-default)] p-0.5">
-            {(["list", "calendar"] as const).map((v) => (
-              <button
-                key={v}
-                type="button"
-                onClick={() => setView(v)}
-                className={`rounded-[var(--button-radius)] px-3 py-1.5 text-[var(--font-body-sm)] capitalize ${
-                  view === v
-                    ? "bg-[var(--brand-primary-muted)] text-[var(--brand-primary)]"
-                    : "text-[var(--text-secondary)]"
-                }`}
-              >
-                {v}
-              </button>
-            ))}
-          </div>
+          <FilterPills
+            options={[
+              { value: "list", label: "List" },
+              { value: "calendar", label: "Calendar" },
+            ]}
+            value={view}
+            onChange={setView}
+          />
         }
       />
 
       {view === "list" ? (
-        <Card>
+        <Card header="Upcoming renewals">
           <DataTable
             data={sorted}
             columns={[
@@ -94,30 +87,39 @@ export default function RenewalsPage() {
         </Card>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {sorted.map((r) => (
-            <Card key={r.id}>
-              <div className="flex items-start gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--brand-primary-muted)]">
-                  <CalendarDays size={20} className="text-[var(--brand-primary)]" />
+          {sorted.map((r) => {
+            const urgent = r.daysUntil <= 30;
+            const soon = r.daysUntil <= 90;
+            return (
+              <Card key={r.id} padding={false} className="overflow-hidden hover:translate-y-0">
+                <div
+                  className={`h-0.5 ${urgent ? "bg-[var(--status-red)]" : soon ? "bg-[var(--status-amber)]" : "bg-[var(--status-green)]"}`}
+                />
+                <div className="p-4">
+                  <div className="flex items-start gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--brand-primary-subtle)]">
+                      <CalendarDays size={20} className="text-[var(--brand-primary)]" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">{r.client}</h3>
+                      <p className="text-[var(--font-body-sm)] text-[var(--text-secondary)]">
+                        {r.renewalDate}
+                      </p>
+                      <Badge
+                        className="mt-2"
+                        variant={urgent ? "danger" : soon ? "warning" : "success"}
+                      >
+                        {r.daysUntil} days
+                      </Badge>
+                      <p className="mt-2 text-[var(--font-caption)] text-[var(--text-tertiary)]">
+                        {r.scenario}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold">{r.client}</h3>
-                  <p className="text-[var(--font-body-sm)] text-[var(--text-secondary)]">
-                    {r.renewalDate}
-                  </p>
-                  <Badge
-                    className="mt-2"
-                    variant={r.daysUntil <= 30 ? "danger" : "warning"}
-                  >
-                    {r.daysUntil} days
-                  </Badge>
-                  <p className="mt-2 text-[var(--font-caption)] text-[var(--text-tertiary)]">
-                    {r.scenario}
-                  </p>
-                </div>
-              </div>
-            </Card>
-          ))}
+              </Card>
+            );
+          })}
         </div>
       )}
     </>

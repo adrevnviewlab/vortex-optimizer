@@ -86,7 +86,7 @@ export default function SignupPage() {
         {error && (
           <p className="text-[var(--font-body-sm)] text-[var(--status-danger)]">{error}</p>
         )}
-        <Button type="submit" variant="primary" className="w-full" disabled={loading}>
+        <Button type="submit" variant="primary" className="w-full spring-press" disabled={loading}>
           {loading ? "Creating account…" : "Continue"}
         </Button>
       </form>

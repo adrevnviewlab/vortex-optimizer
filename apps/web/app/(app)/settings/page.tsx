@@ -79,7 +79,7 @@ function SettingsPageContent() {
     configured: false,
     connected: false,
     status: "blocked",
-    message: "Loading integration status…",
+    message: "Loading integration status?",
   });
   const [connectLoading, setConnectLoading] = useState(false);
   const [syncLoading, setSyncLoading] = useState(false);

@@ -5,6 +5,7 @@ import {
   Badge,
   Card,
   PageHeader,
+  RagCard,
   TrafficLight,
   type RagStatus,
 } from "@vorzop/ui";
@@ -38,34 +39,39 @@ export default function ReadinessPage() {
             ))}
           </div>
         ) : (
-          <ul className="divide-y divide-[var(--border-default)]">
-            {modules.map((mod) => (
-              <li key={mod.key} className="flex items-center justify-between gap-4 py-4">
-                <div>
-                  <p className="text-[var(--font-body-sm)] font-medium">{mod.label}</p>
-                  {mod.message && (
-                    <p className="text-[var(--font-caption)] text-[var(--text-secondary)]">
-                      {mod.message}
-                    </p>
-                  )}
-                </div>
-                <div className="flex items-center gap-2">
-                  <Badge
-                    variant={
-                      mod.status === "live"
-                        ? "success"
-                        : mod.status === "stub"
-                          ? "warning"
-                          : "danger"
-                    }
-                  >
-                    {mod.status}
-                  </Badge>
-                  <TrafficLight status={readinessToRag(mod.status)} />
-                </div>
-              </li>
-            ))}
-          </ul>
+          <div className="space-y-3">
+            {modules.map((mod) => {
+              const rag = readinessToRag(mod.status);
+              return (
+                <RagCard key={mod.key} status={rag} className="hover:translate-y-0">
+                  <div className="flex items-center justify-between gap-4">
+                    <div>
+                      <p className="text-[var(--font-body-sm)] font-medium">{mod.label}</p>
+                      {mod.message && (
+                        <p className="text-[var(--font-caption)] text-[var(--text-secondary)]">
+                          {mod.message}
+                        </p>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Badge
+                        variant={
+                          mod.status === "live"
+                            ? "success"
+                            : mod.status === "stub"
+                              ? "warning"
+                              : "danger"
+                        }
+                      >
+                        {mod.status}
+                      </Badge>
+                      <TrafficLight status={rag} />
+                    </div>
+                  </div>
+                </RagCard>
+              );
+            })}
+          </div>
         )}
       </Card>
     </>
