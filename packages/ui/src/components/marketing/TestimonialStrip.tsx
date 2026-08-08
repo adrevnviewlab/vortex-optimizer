@@ -16,7 +16,7 @@ export function TestimonialStrip({
   return (
     <section className="border-y border-[var(--border-default)] bg-[var(--surface-sunken)] py-12 md:py-16">
       <div className="mx-auto max-w-[var(--content-max-width)] px-4 md:px-6">
-        <p className="mb-8 text-center text-[var(--font-caption)] font-medium uppercase tracking-[var(--tracking-wide)] text-[var(--text-tertiary)]">
+        <p className="mb-8 text-center text-[var(--font-body-sm)] font-semibold text-[var(--text-secondary)]">
           {title}
         </p>
         <div className="grid gap-8 md:grid-cols-3">

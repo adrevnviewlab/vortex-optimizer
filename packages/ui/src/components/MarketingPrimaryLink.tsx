@@ -10,6 +10,7 @@ export interface MarketingPrimaryLinkProps {
   className?: string;
 }
 
+/** Fluent-like rectangular primary CTA (filled). */
 export function MarketingPrimaryLink({ href, children, className }: MarketingPrimaryLinkProps) {
   const [tracing, setTracing] = useState(false);
   const shouldReduceMotion = useReducedMotion();
@@ -23,11 +24,11 @@ export function MarketingPrimaryLink({ href, children, className }: MarketingPri
     <motion.a
       href={href}
       onClick={handleClick}
-      whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
+      whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
       transition={springConfig}
       className={cn(
         "spring-action-rainbow inline-flex h-11 items-center rounded-[var(--button-radius)]",
-        "bg-[var(--brand-primary)] px-6 text-[var(--font-body)] font-medium text-[var(--text-inverse)]",
+        "bg-[var(--brand-primary)] px-6 text-[var(--font-body-sm)] font-semibold text-[var(--text-inverse)]",
         "hover:bg-[var(--brand-primary-hover)] transition-colors",
         tracing && "is-tracing",
         className,

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { GeistMono } from "geist/font/mono";
-import { GeistSans } from "geist/font/sans";
 import "@vorzop/ui/tokens.css";
 import "@vorzop/ui/base.css";
 import { ToastProvider } from "@vorzop/ui";
@@ -17,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+    <html lang="en" className={GeistMono.variable}>
       <body className="font-sans antialiased">
         <AuthProvider>
           <ToastProvider>{children}</ToastProvider>

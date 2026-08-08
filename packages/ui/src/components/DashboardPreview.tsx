@@ -19,11 +19,11 @@ export function DashboardPreview() {
   return (
     <section className="bg-[var(--surface-sunken)] py-16 md:py-24">
       <div className="mx-auto max-w-[var(--content-max-width)] px-4 md:px-6">
-        <p className="mb-2 text-center text-[var(--font-caption)] font-medium uppercase tracking-[var(--tracking-wide)] text-[var(--brand-primary)]">
+        <p className="mb-2 text-center text-[var(--font-body-sm)] font-semibold text-[var(--brand-primary)]">
           Live sample
         </p>
         <h2
-          className="mb-3 text-center font-light tracking-[var(--tracking-tight)]"
+          className="mb-3 text-center font-semibold tracking-[var(--tracking-tight)]"
           style={{ fontSize: "var(--font-h1)" }}
         >
           Your licensing command center

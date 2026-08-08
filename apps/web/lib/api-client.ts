@@ -341,7 +341,7 @@ export interface MicrosoftIntegrationStatus {
   message?: string;
 }
 
-const LICENSE_COLORS = ["#007aff", "#5ac8fa", "#34c759", "#ff9500", "#af52de", "#3c3c43"];
+const LICENSE_COLORS = ["#0067B8", "#3aa0fa", "#107c10", "#f7630c", "#8764b8", "#242424"];
 
 const SEED_CLIENTS: ClientListItem[] = [
   { id: "22222222-2222-2222-2222-222222222201", name: "Contoso Ltd", tenantId: "contoso.onmicrosoft.com", licenses: 800, lastAudit: "2026-07-28", spend: 96800, status: "Active", compliance: 72, savingsPct: 18, region: "US" },
@@ -441,7 +441,7 @@ export const SEED_DASHBOARD: DashboardSummary = {
     { month: "Jul", actual: 96800, optimized: 83500 },
   ],
   licenseDistribution: [
-    { name: "M365 E3", value: 420, color: "#007aff" },
+    { name: "M365 E3", value: 420, color: "#0067B8" },
     { name: "M365 E5", value: 180, color: "#0891B2" },
     { name: "M365 F3", value: 95, color: "#334155" },
     { name: "Power BI Pro", value: 62, color: "#94A3B8" },

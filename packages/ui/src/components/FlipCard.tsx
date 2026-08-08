@@ -11,9 +11,20 @@ export interface FlipCardProps {
   icon?: React.ReactNode;
   step?: string;
   badge?: string;
+  href?: string;
+  hrefLabel?: string;
 }
 
-export function FlipCard({ title, description, icon, step, badge }: FlipCardProps) {
+/** Product-style card with optional flip detail — microsoft.com card grid feel. */
+export function FlipCard({
+  title,
+  description,
+  icon,
+  step,
+  badge,
+  href,
+  hrefLabel = "Learn more",
+}: FlipCardProps) {
   const [flipped, setFlipped] = useState(false);
   const [flicker, setFlicker] = useState(false);
   const shouldReduceMotion = useReducedMotion();
@@ -24,10 +35,40 @@ export function FlipCard({ title, description, icon, step, badge }: FlipCardProp
     setTimeout(() => setFlicker(false), 500);
   };
 
+  const front = (
+    <>
+      {icon && (
+        <div className="mb-4 flex h-10 w-10 items-center justify-center bg-[var(--brand-primary-subtle)]">
+          {icon}
+        </div>
+      )}
+      {step && (
+        <p className="mb-2 text-[var(--font-caption)] font-semibold text-[var(--brand-primary)]">
+          {step}
+        </p>
+      )}
+      <h3 className="text-[var(--font-h3)] font-semibold text-[var(--text-primary)]">{title}</h3>
+      {!shouldReduceMotion && (
+        <p className="mt-3 line-clamp-2 text-left text-[var(--font-body-sm)] text-[var(--text-secondary)]">
+          {description}
+        </p>
+      )}
+      <p className="mt-4 text-left text-[var(--font-body-sm)] font-semibold text-[var(--brand-primary)]">
+        {href ? (
+          <a href={href} className="hover:underline" onClick={(e) => e.stopPropagation()}>
+            {hrefLabel} →
+          </a>
+        ) : (
+          <span className="text-[var(--text-tertiary)]">Hover for details →</span>
+        )}
+      </p>
+    </>
+  );
+
   if (shouldReduceMotion) {
     return (
       <div
-        className="h-48 cursor-pointer md:h-52"
+        className="min-h-52 cursor-pointer"
         onClick={() => setFlipped((f) => !f)}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {
@@ -39,31 +80,21 @@ export function FlipCard({ title, description, icon, step, badge }: FlipCardProp
         tabIndex={0}
         aria-pressed={flipped}
       >
-        <Card className="flex h-full flex-col items-center justify-center text-center" hoverLift={false}>
-          {!flipped ? (
-            <>
-              {icon && (
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--brand-primary-subtle)]">
-                  {icon}
-                </div>
-              )}
-              {step && (
-                <p className="mb-2 text-[var(--font-caption)] font-semibold text-[var(--brand-primary)]">
-                  {step}
-                </p>
-              )}
-              <h3 className="text-[var(--font-h3)] font-semibold">{title}</h3>
-            </>
-          ) : (
-            <>
-              {badge && (
-                <p className="mb-2 text-[var(--font-caption)] font-medium uppercase tracking-[var(--tracking-wide)] text-[var(--text-tertiary)]">
-                  {badge}
-                </p>
-              )}
-              <p className="px-4 text-[var(--font-body-sm)] text-[var(--text-secondary)]">{description}</p>
-            </>
-          )}
+        <Card className="flex h-full flex-col items-start justify-start p-6 text-left" hoverLift={false} padding={false}>
+          <div className="p-6">
+            {!flipped ? (
+              front
+            ) : (
+              <>
+                {badge && (
+                  <p className="mb-2 text-[var(--font-caption)] font-semibold text-[var(--text-tertiary)]">
+                    {badge}
+                  </p>
+                )}
+                <p className="text-[var(--font-body-sm)] text-[var(--text-secondary)]">{description}</p>
+              </>
+            )}
+          </div>
         </Card>
       </div>
     );
@@ -72,7 +103,7 @@ export function FlipCard({ title, description, icon, step, badge }: FlipCardProp
   return (
     <div
       className={cn(
-        "flip-card-shell h-48 cursor-pointer [perspective:1000px] md:h-52",
+        "flip-card-shell min-h-52 cursor-pointer [perspective:1000px]",
         flicker && "is-flickering",
       )}
       onMouseEnter={() => {
@@ -98,40 +129,31 @@ export function FlipCard({ title, description, icon, step, badge }: FlipCardProp
       <motion.div
         animate={{ rotateY: flipped ? 180 : 0 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        className="relative h-full w-full [transform-style:preserve-3d]"
+        className="relative h-full min-h-52 w-full [transform-style:preserve-3d]"
         style={{ transformStyle: "preserve-3d" }}
       >
         <Card
-          className={cn(
-            "absolute inset-0 flex flex-col items-center justify-center text-center [backface-visibility:hidden]",
-          )}
+          className="absolute inset-0 flex flex-col items-start justify-start text-left [backface-visibility:hidden]"
           hoverLift={false}
+          padding={false}
         >
-          {icon && (
-            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--brand-primary-subtle)]">
-              {icon}
-            </div>
-          )}
-          {step && (
-            <p className="mb-2 text-[var(--font-caption)] font-semibold text-[var(--brand-primary)]">
-              {step}
-            </p>
-          )}
-          <h3 className="text-[var(--font-h3)] font-semibold">{title}</h3>
+          <div className="p-6">{front}</div>
         </Card>
         <Card
-          className={cn(
-            "absolute inset-0 flex flex-col items-center justify-center p-6 text-center [backface-visibility:hidden]",
-          )}
+          className="absolute inset-0 flex flex-col items-start justify-center text-left [backface-visibility:hidden]"
           hoverLift={false}
+          padding={false}
           style={{ transform: "rotateY(180deg)" }}
         >
-          {badge && (
-            <p className="mb-2 text-[var(--font-caption)] font-medium uppercase tracking-[var(--tracking-wide)] text-[var(--text-tertiary)]">
-              {badge}
-            </p>
-          )}
-          <p className="text-[var(--font-body-sm)] text-[var(--text-secondary)]">{description}</p>
+          <div className="p-6">
+            {badge && (
+              <p className="mb-2 text-[var(--font-caption)] font-semibold text-[var(--text-tertiary)]">
+                {badge}
+              </p>
+            )}
+            <h3 className="mb-2 text-[var(--font-h3)] font-semibold">{title}</h3>
+            <p className="text-[var(--font-body-sm)] text-[var(--text-secondary)]">{description}</p>
+          </div>
         </Card>
       </motion.div>
     </div>

@@ -16,12 +16,12 @@ export function SectionHeader({
   return (
     <div className={`mb-10 max-w-2xl ${alignClass}`}>
       {eyebrow && (
-        <p className="mb-2 text-[var(--font-caption)] font-medium uppercase tracking-[var(--tracking-wide)] text-[var(--brand-primary)]">
+        <p className="mb-2 text-[var(--font-body-sm)] font-semibold text-[var(--brand-primary)]">
           {eyebrow}
         </p>
       )}
       <h2
-        className="font-light tracking-[var(--tracking-tight)]"
+        className="font-semibold tracking-[var(--tracking-tight)] text-[var(--text-primary)]"
         style={{ fontSize: "var(--font-h2)" }}
       >
         {title}

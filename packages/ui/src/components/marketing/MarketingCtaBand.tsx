@@ -10,6 +10,7 @@ export interface MarketingCtaBandProps {
   disclaimer?: string;
 }
 
+/** Full-width CTA band — microsoft.com promotional strip style. */
 export function MarketingCtaBand({
   title,
   description,
@@ -20,10 +21,10 @@ export function MarketingCtaBand({
   disclaimer,
 }: MarketingCtaBandProps) {
   return (
-    <section className="mx-auto max-w-[var(--content-max-width)] px-4 py-16 md:px-6 md:py-24">
-      <div className="rounded-[var(--card-radius)] border border-[var(--border-default)] bg-[var(--surface-raised)] p-8 text-center shadow-[var(--shadow-sm)] md:p-12">
+    <section className="bg-[var(--surface-sunken)] py-16 md:py-20">
+      <div className="mx-auto max-w-[var(--content-inner-width)] px-4 text-center md:px-6">
         <h2
-          className="font-light tracking-[var(--tracking-tight)]"
+          className="font-semibold tracking-[var(--tracking-tight)] text-[var(--text-primary)]"
           style={{ fontSize: "var(--font-h2)" }}
         >
           {title}
@@ -36,7 +37,7 @@ export function MarketingCtaBand({
           {secondaryHref && secondaryLabel && (
             <a
               href={secondaryHref}
-              className="inline-flex h-11 items-center rounded-[var(--button-radius)] border border-[var(--border-default)] px-6 text-[var(--font-body)] font-medium text-[var(--text-secondary)] hover:bg-[var(--surface-sunken)]"
+              className="inline-flex h-11 items-center border border-[var(--text-primary)] px-6 text-[var(--font-body-sm)] font-semibold text-[var(--text-primary)] hover:bg-[var(--surface-canvas)]"
             >
               {secondaryLabel}
             </a>

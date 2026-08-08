@@ -24,24 +24,30 @@ export const metadata: Metadata = {
     "Independent Microsoft licensing advisory. Optimize M365, Azure, and EA spend — recover 10–40% without reselling licenses.",
 };
 
-const dayOneGains = [
+const productCards = [
   {
     title: "Savings before the renewal call",
     description:
       "See inactive users, SKU overlap, and tier sprawl before finance or procurement asks — ranked by dollar impact and confidence.",
     icon: <TrendingDown size={20} className="text-[var(--brand-primary)]" />,
+    href: "/features",
+    hrefLabel: "Explore savings engine",
   },
   {
     title: "One audit trail, not five spreadsheets",
     description:
       "Upload tenant exports once. Vortex normalizes SKUs, runs 50+ rules, and keeps findings auditable for client review.",
     icon: <FileCheck size={20} className="text-[var(--brand-primary)]" />,
+    href: "/features",
+    hrefLabel: "See audit intake",
   },
   {
     title: "Client-ready narrative",
     description:
       "Executive PDFs with vendor-neutral language — advisory reports your clients trust, not license resale quotes.",
     icon: <Lightbulb size={20} className="text-[var(--brand-primary)]" />,
+    href: "/demo",
+    hrefLabel: "View sample report",
   },
 ];
 
@@ -50,16 +56,19 @@ const platformModules = [
     title: "License intake",
     description: "CSV and Excel from M365 admin center, Azure, Entra, and SAM tools — field mapping included.",
     icon: <Building2 size={20} className="text-[var(--brand-primary)]" />,
+    href: "/features",
   },
   {
     title: "Savings engine",
     description: "Ranked opportunities with dollar estimates. Typical engagements recover 10–40% of spend.",
     icon: <DollarSign size={20} className="text-[var(--brand-primary)]" />,
+    href: "/features",
   },
   {
     title: "Compliance RAG",
     description: "Traffic-light health signals for overspend, inactive users, and compliance risk.",
     icon: <ShieldCheck size={20} className="text-[var(--brand-primary)]" />,
+    href: "/features",
   },
 ];
 
@@ -137,23 +146,34 @@ export default function WelcomePage() {
   return (
     <>
       <HeroSection />
-      <DashboardPreview />
 
-      <section className="mx-auto max-w-[var(--content-max-width)] px-4 py-16 md:px-6 md:py-24">
-        <SectionHeader
-          eyebrow="Day one impact"
-          title="What consultancies gain on day one"
-          description="Features only matter if they change Monday morning. Here is the payoff for advisors who still run licensing audits on spreadsheets."
-        />
-        <div className="grid gap-6 md:grid-cols-3">
-          {dayOneGains.map((item) => (
-            <FlipCard key={item.title} title={item.title} description={item.description} icon={item.icon} />
-          ))}
+      {/* microsoft.com-style product card grid */}
+      <section className="bg-[var(--surface-canvas)] py-16 md:py-20">
+        <div className="mx-auto max-w-[var(--content-max-width)] px-4 md:px-6 lg:px-8">
+          <SectionHeader
+            title="What consultancies gain on day one"
+            description="Features only matter if they change Monday morning. Here is the payoff for advisors who still run licensing audits on spreadsheets."
+            align="left"
+          />
+          <div className="grid gap-6 md:grid-cols-3">
+            {productCards.map((item) => (
+              <FlipCard
+                key={item.title}
+                title={item.title}
+                description={item.description}
+                icon={item.icon}
+                href={item.href}
+                hrefLabel={item.hrefLabel}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="bg-[var(--surface-sunken)] py-16 md:py-24">
-        <div className="mx-auto max-w-[var(--content-max-width)] px-4 md:px-6">
+      <DashboardPreview />
+
+      <section className="bg-[var(--surface-canvas)] py-16 md:py-24">
+        <div className="mx-auto max-w-[var(--content-max-width)] px-4 md:px-6 lg:px-8">
           <SectionHeader
             eyebrow="Platform modules"
             title="What your practice runs on"
@@ -161,13 +181,19 @@ export default function WelcomePage() {
           />
           <div className="grid gap-6 md:grid-cols-3">
             {platformModules.map((item) => (
-              <FlipCard key={item.title} title={item.title} description={item.description} icon={item.icon} />
+              <FlipCard
+                key={item.title}
+                title={item.title}
+                description={item.description}
+                icon={item.icon}
+                href={item.href}
+              />
             ))}
           </div>
           <p className="mt-8 text-center">
             <a
               href="/features"
-              className="text-[var(--font-body-sm)] font-medium text-[var(--brand-primary)] hover:underline"
+              className="text-[var(--font-body-sm)] font-semibold text-[var(--brand-primary)] hover:underline"
             >
               Full feature list →
             </a>
@@ -175,10 +201,12 @@ export default function WelcomePage() {
         </div>
       </section>
 
-      <HowItWorksSteps
-        title="From first look to live practice"
-        steps={howItWorksSteps}
-      />
+      <div className="bg-[var(--surface-sunken)]">
+        <HowItWorksSteps
+          title="From first look to live practice"
+          steps={howItWorksSteps}
+        />
+      </div>
 
       <TestimonialStrip testimonials={testimonials} />
 
@@ -191,7 +219,7 @@ export default function WelcomePage() {
         primaryLabel="Get started"
         secondaryHref="/demo"
         secondaryLabel="See the walkthrough"
-        disclaimer="Independent Microsoft licensing advisory — not a CSP or license reseller."
+        disclaimer="Independent Microsoft licensing advisory — not a CSP or license reseller. Not affiliated with Microsoft."
       />
     </>
   );

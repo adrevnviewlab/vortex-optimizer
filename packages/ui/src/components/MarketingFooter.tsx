@@ -1,41 +1,85 @@
 export function MarketingFooter() {
+  const year = new Date().getFullYear();
+
+  const columns = [
+    {
+      title: "Product",
+      links: [
+        { href: "/welcome", label: "Home" },
+        { href: "/features", label: "Features" },
+        { href: "/pricing", label: "Pricing" },
+        { href: "/signup", label: "Get started" },
+      ],
+    },
+    {
+      title: "Resources",
+      links: [
+        { href: "/demo", label: "Demo walkthrough" },
+        { href: "/pitch", label: "Buyer pitch" },
+        { href: "/features", label: "How it works" },
+        { href: "/pricing", label: "Plans & pricing" },
+      ],
+    },
+    {
+      title: "Practice",
+      links: [
+        { href: "/login", label: "Sign in" },
+        { href: "/signup", label: "Create account" },
+        { href: "/pricing", label: "Contact sales" },
+      ],
+    },
+    {
+      title: "About",
+      links: [
+        { href: "/welcome", label: "Independent advisory" },
+        { href: "/features", label: "Vendor-neutral approach" },
+        { href: "/pricing", label: "Partner pricing" },
+      ],
+    },
+  ];
+
   return (
-    <footer className="border-t border-[var(--border-default)] bg-[var(--surface-canvas)]">
-      <div className="mx-auto max-w-[var(--content-max-width)] px-4 py-12 md:px-6">
-        <p className="max-w-xl text-[var(--font-body-sm)] text-[var(--text-secondary)]">
-          Independent Microsoft licensing advisory platform — M365, Azure, and EA optimization.
-          Vendor-neutral guidance for operators, not a CSP or license reseller.
-        </p>
-        <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
-          <li>
-            <a href="/welcome" className="text-[var(--font-body-sm)] text-[var(--text-secondary)] hover:text-[var(--brand-primary)]">
-              Home
+    <footer className="bg-[var(--surface-footer)] text-[var(--text-footer)]">
+      <div className="mx-auto max-w-[var(--content-max-width)] px-4 py-12 md:px-6 md:py-16 lg:px-8">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          {columns.map((col) => (
+            <div key={col.title}>
+              <h3 className="mb-4 text-[var(--font-body-sm)] font-semibold text-white">
+                {col.title}
+              </h3>
+              <ul className="space-y-2">
+                {col.links.map((link) => (
+                  <li key={`${col.title}-${link.label}`}>
+                    <a
+                      href={link.href}
+                      className="text-[var(--font-body-sm)] text-[var(--text-footer)] hover:underline"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-12 border-t border-white/15 pt-8">
+          <p className="max-w-3xl text-[var(--font-body-sm)] text-[var(--text-footer)]">
+            Independent Microsoft licensing advisory platform — M365, Azure, and EA optimization.
+            Vendor-neutral guidance for operators. Vortex Optimizer is not affiliated with, endorsed by,
+            or a partner of Microsoft Corporation. Not a CSP or license reseller.
+          </p>
+          <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-[var(--font-caption)] text-[var(--text-footer)]">
+            <span>© {year} Vortex Optimizer</span>
+            <a href="/welcome" className="hover:underline">
+              Privacy
             </a>
-          </li>
-          <li>
-            <a href="/features" className="text-[var(--font-body-sm)] text-[var(--text-secondary)] hover:text-[var(--brand-primary)]">
-              Features
+            <a href="/welcome" className="hover:underline">
+              Terms
             </a>
-          </li>
-          <li>
-            <a href="/pricing" className="text-[var(--font-body-sm)] text-[var(--text-secondary)] hover:text-[var(--brand-primary)]">
-              Pricing
-            </a>
-          </li>
-          <li>
-            <a href="/signup" className="text-[var(--font-body-sm)] text-[var(--text-secondary)] hover:text-[var(--brand-primary)]">
-              Get started
-            </a>
-          </li>
-          <li>
-            <a href="/login" className="text-[var(--font-body-sm)] text-[var(--text-secondary)] hover:text-[var(--brand-primary)]">
-              Sign in
-            </a>
-          </li>
-        </ul>
-        <p className="mt-8 text-[var(--font-caption)] text-[var(--text-tertiary)]">
-          © {new Date().getFullYear()} Vortex Optimizer · Independent advisory — not legal or compliance advice.
-        </p>
+            <span>Not legal or compliance advice</span>
+          </div>
+        </div>
       </div>
     </footer>
   );

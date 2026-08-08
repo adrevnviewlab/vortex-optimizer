@@ -227,30 +227,43 @@ function DeepDiveVisual({ type }: { type: string }) {
 export default function FeaturesPage() {
   return (
     <>
-      <section className="mx-auto max-w-[var(--content-max-width)] px-4 py-16 text-center md:px-6">
-        <h1
-          className="font-semibold tracking-[var(--tracking-tight)]"
-          style={{
-            fontFamily: "var(--font-display-family)",
-            fontSize: "var(--font-h1)",
-          }}
-        >
-          Everything you need to optimize M365 licensing
-        </h1>
-        <p className="mx-auto mt-3 max-w-xl text-[var(--font-body)] text-[var(--text-secondary)]">
-          From data intake to executive narrative — one platform for independent licensing advisory, not
-          license resale.
-        </p>
+      <section className="border-b border-[var(--border-default)] bg-[var(--surface-canvas)]">
+        <div className="mx-auto max-w-[var(--content-max-width)] px-4 py-16 md:px-6 md:py-20 lg:px-8">
+          <p className="mb-2 text-[var(--font-body-sm)] font-semibold text-[var(--brand-primary)]">
+            Features
+          </p>
+          <h1
+            className="max-w-3xl font-semibold tracking-[var(--tracking-tight)] text-[var(--text-primary)]"
+            style={{ fontSize: "var(--font-display)" }}
+          >
+            Everything you need to optimize M365 licensing
+          </h1>
+          <p className="mt-4 max-w-xl text-[1.0625rem] text-[var(--text-secondary)]">
+            From data intake to executive narrative — one platform for independent licensing advisory, not
+            license resale.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <MarketingPrimaryLink href="/signup">Get started</MarketingPrimaryLink>
+            <a
+              href="/demo"
+              className="inline-flex h-11 items-center border border-[var(--text-primary)] px-6 text-[var(--font-body-sm)] font-semibold text-[var(--text-primary)] hover:bg-[var(--surface-sunken)]"
+            >
+              See the walkthrough
+            </a>
+          </div>
+        </div>
       </section>
 
-      <section className="mx-auto grid max-w-[var(--content-max-width)] grid-cols-1 gap-6 px-4 pb-12 md:grid-cols-2 md:px-6 lg:grid-cols-3">
-        {features.map((f) => (
-          <FlipCard key={f.title} title={f.title} description={f.description} icon={f.icon} />
-        ))}
+      <section className="bg-[var(--surface-sunken)] py-16 md:py-20">
+        <div className="mx-auto grid max-w-[var(--content-max-width)] grid-cols-1 gap-6 px-4 md:grid-cols-2 md:px-6 lg:grid-cols-3 lg:px-8">
+          {features.map((f) => (
+            <FlipCard key={f.title} title={f.title} description={f.description} icon={f.icon} href="/demo" />
+          ))}
+        </div>
       </section>
 
-      <section className="bg-[var(--surface-sunken)] py-16 md:py-24">
-        <div className="mx-auto max-w-[var(--content-max-width)] px-4 md:px-6">
+      <section className="bg-[var(--surface-canvas)] py-16 md:py-24">
+        <div className="mx-auto max-w-[var(--content-max-width)] px-4 md:px-6 lg:px-8">
           <SectionHeader
             title="Deep-dive modules"
             description="Each module includes the full workflow — not add-on upsells. Built for independent advisors running Microsoft licensing engagements."
@@ -259,14 +272,14 @@ export default function FeaturesPage() {
             {featureDetails.map((detail) => (
               <div
                 key={detail.title}
-                className="rounded-[var(--card-radius)] border border-[var(--border-default)] bg-[var(--surface-raised)] p-6 shadow-[var(--shadow-sm)]"
+                className="border border-[var(--border-default)] bg-[var(--surface-raised)] p-6"
               >
-                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--brand-primary-subtle)]">
+                <div className="mb-4 flex h-10 w-10 items-center justify-center bg-[var(--brand-primary-subtle)]">
                   {detail.icon}
                 </div>
                 <h3 className="text-[var(--font-h3)] font-semibold">{detail.title}</h3>
                 <p className="mt-1 text-[var(--font-caption)] text-[var(--text-tertiary)]">{detail.subtitle}</p>
-                <p className="mt-4 text-[var(--font-body-sm)] font-medium text-[var(--text-secondary)]">
+                <p className="mt-4 text-[var(--font-body-sm)] font-semibold text-[var(--text-secondary)]">
                   What&apos;s included
                 </p>
                 <ul className="mt-2 space-y-2">
@@ -275,7 +288,7 @@ export default function FeaturesPage() {
                       key={bullet}
                       className="flex items-start gap-2 text-[var(--font-body-sm)] text-[var(--text-secondary)]"
                     >
-                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--brand-primary)]" />
+                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 bg-[var(--brand-primary)]" />
                       {bullet}
                     </li>
                   ))}
@@ -374,8 +387,8 @@ export default function FeaturesPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[var(--content-max-width)] px-4 pb-8 md:px-6">
-        <div className="rounded-[var(--card-radius)] border border-[var(--border-default)] bg-[var(--surface-raised)] p-8 text-center shadow-[var(--shadow-sm)]">
+      <section className="mx-auto max-w-[var(--content-max-width)] px-4 pb-8 md:px-6 lg:px-8">
+        <div className="border border-[var(--border-default)] bg-[var(--surface-raised)] p-8 text-center md:p-12">
           <h2 className="text-[var(--font-h2)] font-semibold">Ready to recover licensing spend?</h2>
           <p className="mt-2 text-[var(--font-body-sm)] text-[var(--text-secondary)]">
             See transparent USD pricing for SaaS plans and one-time audit engagements.

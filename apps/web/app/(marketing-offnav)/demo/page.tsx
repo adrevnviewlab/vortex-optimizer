@@ -103,28 +103,25 @@ export default function DemoPage() {
         <BrandLogo size="md" href="/welcome" />
       </header>
 
-      <section className="mx-auto max-w-[var(--content-max-width)] px-6 py-12 text-center">
-        <p className="mb-2 text-[var(--font-caption)] font-medium uppercase tracking-[var(--tracking-wide)] text-[var(--brand-primary)]">
+      <section className="mx-auto max-w-[var(--content-max-width)] px-6 py-12 md:py-16 lg:px-8">
+        <p className="mb-2 text-[var(--font-body-sm)] font-semibold text-[var(--brand-primary)]">
           Demo walkthrough · no signup required
         </p>
         <h1
-          className="font-semibold tracking-[var(--tracking-tight)]"
-          style={{
-            fontFamily: "var(--font-display-family)",
-            fontSize: "var(--font-h1)",
-          }}
+          className="max-w-3xl font-semibold tracking-[var(--tracking-tight)] text-[var(--text-primary)]"
+          style={{ fontSize: "var(--font-display)" }}
         >
           See what advisors gain — value, not a feature dump
         </h1>
-        <p className="mx-auto mt-3 max-w-xl text-[var(--font-body)] text-[var(--text-secondary)]">
+        <p className="mt-4 max-w-xl text-[1.0625rem] text-[var(--text-secondary)]">
           Sample dashboard and five outcomes for Microsoft licensing optimization. Explore below, then run the
           guided walkthrough or start a real trial.
         </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-3">
+        <div className="mt-8 flex flex-wrap gap-3">
           <MarketingPrimaryLink href="/signup">Get started</MarketingPrimaryLink>
           <a
             href="/pitch"
-            className="inline-flex h-11 items-center rounded-[var(--button-radius)] border border-[var(--border-default)] px-6 text-[var(--font-body)] font-medium text-[var(--text-secondary)] hover:bg-[var(--surface-sunken)]"
+            className="inline-flex h-11 items-center border border-[var(--text-primary)] px-6 text-[var(--font-body-sm)] font-semibold text-[var(--text-primary)] hover:bg-[var(--surface-sunken)]"
           >
             Use the buyer pitch
           </a>

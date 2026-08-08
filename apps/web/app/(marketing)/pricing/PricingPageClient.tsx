@@ -117,26 +117,26 @@ export default function PricingPageClient() {
   );
 
   return (
-    <section className="mx-auto max-w-[var(--content-max-width)] px-4 py-16 md:px-6">
-      <div className="mb-12 text-center">
-        <p className="mb-2 text-[var(--font-caption)] font-medium uppercase tracking-[var(--tracking-wide)] text-[var(--brand-primary)]">
-          Simple, transparent pricing
-        </p>
-        <h1
-          className="font-semibold tracking-[var(--tracking-tight)]"
-          style={{
-            fontFamily: "var(--font-display-family)",
-            fontSize: "var(--font-h1)",
-          }}
-        >
-          Always know what your practice costs
-        </h1>
-        <p className="mx-auto mt-3 max-w-xl text-[var(--font-body)] text-[var(--text-secondary)]">
-          Pay for the advisory platform you run — not per seat, not per module. Monthly USD list prices below;
-          regional packaging available on request.
-        </p>
-      </div>
+    <div className="bg-[var(--surface-canvas)]">
+      <section className="border-b border-[var(--border-default)]">
+        <div className="mx-auto max-w-[var(--content-max-width)] px-4 py-16 md:px-6 md:py-20 lg:px-8">
+          <p className="mb-2 text-[var(--font-body-sm)] font-semibold text-[var(--brand-primary)]">
+            Pricing
+          </p>
+          <h1
+            className="max-w-3xl font-semibold tracking-[var(--tracking-tight)] text-[var(--text-primary)]"
+            style={{ fontSize: "var(--font-display)" }}
+          >
+            Always know what your practice costs
+          </h1>
+          <p className="mt-4 max-w-xl text-[1.0625rem] text-[var(--text-secondary)]">
+            Pay for the advisory platform you run — not per seat, not per module. Monthly USD list prices below;
+            regional packaging available on request.
+          </p>
+        </div>
+      </section>
 
+      <section className="mx-auto max-w-[var(--content-max-width)] px-4 py-12 md:px-6 lg:px-8">
       <PricingTable
         stripeConnected={stripeConnected}
         onCheckout={handleCheckout}
@@ -175,7 +175,7 @@ export default function PricingPageClient() {
           {FAQ.map((item) => (
             <details
               key={item.q}
-              className="rounded-[var(--card-radius)] border border-[var(--border-default)] bg-[var(--surface-raised)] p-4"
+              className="border border-[var(--border-default)] bg-[var(--surface-raised)] p-4"
             >
               <summary className="cursor-pointer text-[var(--font-body-sm)] font-semibold">{item.q}</summary>
               <p className="mt-2 text-[var(--font-body-sm)] text-[var(--text-secondary)]">{item.a}</p>
@@ -183,6 +183,7 @@ export default function PricingPageClient() {
           ))}
         </div>
       </div>
+      </section>
 
       <MarketingCtaBand
         title="Ready to price your practice?"
@@ -193,6 +194,6 @@ export default function PricingPageClient() {
         secondaryLabel="See the walkthrough"
         disclaimer="USD list prices — regional partners may offer localized pricing."
       />
-    </section>
+    </div>
   );
 }

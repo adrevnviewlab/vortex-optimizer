@@ -119,13 +119,12 @@ export default function PitchPage() {
 
       <main className="flex flex-1 flex-col items-center justify-center px-8 text-center">
         {slide.accent && <BrandLogo size="lg" className="mb-8" showWordmark={false} />}
-        <p className="mb-2 text-[var(--font-caption)] font-medium uppercase tracking-[var(--tracking-wide)] text-[var(--brand-primary)]">
+        <p className="mb-2 text-[var(--font-body-sm)] font-semibold text-[var(--brand-primary)]">
           Buyer pitch · Microsoft licensing
         </p>
         <h1
           className="max-w-3xl font-semibold tracking-[var(--tracking-tight)] text-[var(--text-primary)]"
           style={{
-            fontFamily: "var(--font-display-family)",
             fontSize: "clamp(2rem, 5vw, 3.5rem)",
           }}
         >

@@ -15,7 +15,7 @@ body {
   margin: 0;
   background: var(--surface-canvas);
   color: var(--text-primary);
-  font-family: var(--font-sans, "Geist", "Geist Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", ui-sans-serif, sans-serif);
+  font-family: "Segoe UI", "Segoe UI Variable", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
   font-size: var(--font-body);
   line-height: var(--leading-normal);
 }

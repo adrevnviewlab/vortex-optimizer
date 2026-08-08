@@ -14,9 +14,9 @@ export interface ButtonProps extends Omit<HTMLMotionProps<"button">, "ref"> {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    "bg-[var(--brand-primary)] text-[var(--text-inverse)] hover:bg-[var(--brand-primary-hover)] border-transparent",
+    "bg-[var(--brand-primary)] text-[var(--text-inverse)] hover:bg-[var(--brand-primary-hover)] border-transparent font-semibold",
   secondary:
-    "bg-[var(--surface-raised)] text-[var(--text-primary)] border-[var(--border-default)] hover:bg-[var(--surface-sunken)]",
+    "bg-transparent text-[var(--text-primary)] border-[var(--text-primary)] hover:bg-[var(--surface-sunken)] font-semibold",
   ghost:
     "bg-transparent text-[var(--text-secondary)] border-transparent hover:bg-[var(--brand-primary-muted)] hover:text-[var(--brand-primary)]",
   danger:
@@ -25,8 +25,8 @@ const variantStyles: Record<ButtonVariant, string> = {
 
 const sizeStyles = {
   sm: "h-8 px-3 text-[var(--font-body-sm)]",
-  md: "h-9 px-4 text-[var(--font-body)]",
-  lg: "h-11 px-6 text-[var(--font-body)]",
+  md: "h-9 px-4 text-[var(--font-body-sm)]",
+  lg: "h-11 px-6 text-[var(--font-body-sm)]",
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(

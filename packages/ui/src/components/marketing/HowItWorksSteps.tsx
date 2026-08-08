@@ -19,7 +19,7 @@ export function HowItWorksSteps({ title, description, steps }: HowItWorksStepsPr
     <section className="mx-auto max-w-[var(--content-max-width)] px-4 py-16 md:px-6 md:py-24">
       <div className="mb-10 max-w-2xl">
         <h2
-          className="font-light tracking-[var(--tracking-tight)]"
+          className="font-semibold tracking-[var(--tracking-tight)]"
           style={{ fontSize: "var(--font-h2)" }}
         >
           {title}

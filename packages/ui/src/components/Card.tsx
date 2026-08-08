@@ -46,8 +46,8 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
         onClick={onClick}
         className={cn(
           "rounded-[var(--card-radius)] border border-[var(--border-default)]",
-          "bg-[var(--surface-raised)] shadow-[var(--shadow-xs)]",
-          hoverLift && "hover:shadow-[var(--shadow-sm)]",
+          "bg-[var(--surface-raised)]",
+          hoverLift && "hover:bg-[var(--surface-zebra)]",
           onClick && "cursor-pointer",
           className
         )}
