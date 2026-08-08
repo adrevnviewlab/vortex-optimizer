@@ -243,10 +243,16 @@ export default function FeaturesPage() {
             license resale.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <MarketingPrimaryLink href="/signup">Get started</MarketingPrimaryLink>
+            <MarketingPrimaryLink href="/demo/launch">Try the demo</MarketingPrimaryLink>
+            <a
+              href="/signup"
+              className="inline-flex h-11 items-center border border-[var(--text-primary)] px-6 text-[var(--font-body-sm)] font-semibold text-[var(--text-primary)] hover:bg-[var(--surface-sunken)]"
+            >
+              Get started
+            </a>
             <a
               href="/demo"
-              className="inline-flex h-11 items-center border border-[var(--text-primary)] px-6 text-[var(--font-body-sm)] font-semibold text-[var(--text-primary)] hover:bg-[var(--surface-sunken)]"
+              className="inline-flex h-11 items-center px-4 text-[var(--font-body-sm)] font-semibold text-[var(--brand-primary)] hover:underline"
             >
               See the walkthrough
             </a>
@@ -257,7 +263,14 @@ export default function FeaturesPage() {
       <section className="bg-[var(--surface-sunken)] py-16 md:py-20">
         <div className="mx-auto grid max-w-[var(--content-max-width)] grid-cols-1 gap-6 px-4 md:grid-cols-2 md:px-6 lg:grid-cols-3 lg:px-8">
           {features.map((f) => (
-            <FlipCard key={f.title} title={f.title} description={f.description} icon={f.icon} href="/demo" />
+            <FlipCard
+              key={f.title}
+              title={f.title}
+              description={f.description}
+              icon={f.icon}
+              href="/demo/launch"
+              hrefLabel="Explore live demo →"
+            />
           ))}
         </div>
       </section>
@@ -401,11 +414,11 @@ export default function FeaturesPage() {
 
       <MarketingCtaBand
         title="Try it on sample data first"
-        description="Explore the Contoso Ltd demo walkthrough — no signup required."
-        primaryHref="/demo"
-        primaryLabel="See the walkthrough"
-        secondaryHref="/signup"
-        secondaryLabel="Get started"
+        description="One-click into the Contoso Ltd workspace — seeded audits, findings, and savings. No signup required."
+        primaryHref="/demo/launch"
+        primaryLabel="Explore live demo"
+        secondaryHref="/demo"
+        secondaryLabel="See the walkthrough"
       />
     </>
   );

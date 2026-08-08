@@ -58,3 +58,5 @@ export { TestimonialStrip } from "./components/marketing/TestimonialStrip";
 export type { Testimonial } from "./components/marketing/TestimonialStrip";
 export { cn, springConfig, formatCurrency, computeTrafficLight } from "./lib/cn";
 export type { RagStatus } from "./lib/cn";
+export { APP_NAV_ITEMS } from "./lib/nav";
+export type { AppNavItem } from "./lib/nav";

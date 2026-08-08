@@ -46,8 +46,8 @@ const productCards = [
     description:
       "Executive PDFs with vendor-neutral language — advisory reports your clients trust, not license resale quotes.",
     icon: <Lightbulb size={20} className="text-[var(--brand-primary)]" />,
-    href: "/demo",
-    hrefLabel: "View sample report",
+    href: "/demo/launch",
+    hrefLabel: "Open live demo →",
   },
 ];
 
@@ -56,29 +56,29 @@ const platformModules = [
     title: "License intake",
     description: "CSV and Excel from M365 admin center, Azure, Entra, and SAM tools — field mapping included.",
     icon: <Building2 size={20} className="text-[var(--brand-primary)]" />,
-    href: "/features",
+    href: "/demo/launch",
   },
   {
     title: "Savings engine",
     description: "Ranked opportunities with dollar estimates. Typical engagements recover 10–40% of spend.",
     icon: <DollarSign size={20} className="text-[var(--brand-primary)]" />,
-    href: "/features",
+    href: "/demo/launch",
   },
   {
     title: "Compliance RAG",
     description: "Traffic-light health signals for overspend, inactive users, and compliance risk.",
     icon: <ShieldCheck size={20} className="text-[var(--brand-primary)]" />,
-    href: "/features",
+    href: "/demo/launch",
   },
 ];
 
 const howItWorksSteps = [
   {
     number: "01",
-    title: "See the walkthrough",
-    description: "Sample dashboard and outcomes — no signup required.",
-    href: "/demo",
-    hrefLabel: "Open demo →",
+    title: "Try the live demo",
+    description: "One-click Contoso Ltd workspace — seeded data, no signup.",
+    href: "/demo/launch",
+    hrefLabel: "Explore live demo →",
   },
   {
     number: "02",
@@ -214,11 +214,11 @@ export default function WelcomePage() {
 
       <MarketingCtaBand
         title="Ready for your next licensing audit?"
-        description="Create an account for your advisory practice — or explore the demo walkthrough with seeded Contoso Ltd data."
-        primaryHref="/signup"
-        primaryLabel="Get started"
-        secondaryHref="/demo"
-        secondaryLabel="See the walkthrough"
+        description="Create an account for your advisory practice — or explore the live Contoso Ltd demo with one click."
+        primaryHref="/demo/launch"
+        primaryLabel="Try the demo"
+        secondaryHref="/signup"
+        secondaryLabel="Get started"
         disclaimer="Independent Microsoft licensing advisory — not a CSP or license reseller. Not affiliated with Microsoft."
       />
     </>

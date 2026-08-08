@@ -21,9 +21,15 @@ const defaultResults: SearchResult[] = [
   { id: "1", label: "Contoso Ltd", group: "Clients", href: "/clients" },
   { id: "2", label: "Fabrikam Inc", group: "Clients", href: "/clients" },
   { id: "3", label: "Q4 M365 Audit", group: "Audits", href: "/audits" },
-  { id: "4", label: "Executive Summary — Contoso", group: "Reports", href: "/reports" },
-  { id: "5", label: "New Audit", group: "Actions", href: "/audits" },
-  { id: "6", label: "Export Report", group: "Actions", href: "/reports" },
+  { id: "4", label: "License assessment", group: "Modules", href: "/licenses" },
+  { id: "5", label: "Utilization analysis", group: "Modules", href: "/utilization" },
+  { id: "6", label: "Compliance RAG", group: "Modules", href: "/compliance" },
+  { id: "7", label: "Cost savings roadmap", group: "Modules", href: "/roadmap" },
+  { id: "8", label: "Advisory workspace", group: "Modules", href: "/advisory" },
+  { id: "9", label: "Client portal", group: "Modules", href: "/portal" },
+  { id: "10", label: "Executive Summary — Contoso", group: "Reports", href: "/reports" },
+  { id: "11", label: "New Audit", group: "Actions", href: "/audits" },
+  { id: "12", label: "Export Report", group: "Actions", href: "/reports" },
 ];
 
 export function SearchCommand({ results = defaultResults, onSelect }: SearchCommandProps) {

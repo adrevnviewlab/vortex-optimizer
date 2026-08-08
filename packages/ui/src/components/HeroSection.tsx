@@ -73,7 +73,7 @@ export function HeroSection({
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...springConfig, delay: 0.15 }}
           >
-            <MarketingPrimaryLink href="/signup">Get started</MarketingPrimaryLink>
+            <MarketingPrimaryLink href="/demo/launch">Try the demo</MarketingPrimaryLink>
             <motion.a
               href="/features"
               whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
@@ -82,10 +82,24 @@ export function HeroSection({
             >
               See features
             </motion.a>
+            <motion.a
+              href="/signup"
+              whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
+              transition={springConfig}
+              className="inline-flex min-h-11 items-center px-4 py-2.5 text-[var(--font-body-sm)] font-semibold text-[var(--brand-primary)] hover:underline"
+            >
+              Get started
+            </motion.a>
           </motion.div>
 
           {showDemoLinks && (
             <p className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-[var(--font-body-sm)]">
+              <a
+                href="/demo/launch"
+                className="text-[var(--brand-primary)] underline-offset-2 hover:underline"
+              >
+                Explore live demo
+              </a>
               <a
                 href="/demo"
                 className="text-[var(--brand-primary)] underline-offset-2 hover:underline"

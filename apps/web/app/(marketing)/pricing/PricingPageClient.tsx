@@ -187,11 +187,11 @@ export default function PricingPageClient() {
 
       <MarketingCtaBand
         title="Ready to price your practice?"
-        description="Start a trial for your advisory firm, or explore the demo walkthrough with seeded Contoso Ltd data."
-        primaryHref="/signup"
-        primaryLabel="Get started"
-        secondaryHref="/demo"
-        secondaryLabel="See the walkthrough"
+        description="Start a trial for your advisory firm, or explore the live Contoso Ltd demo with one click."
+        primaryHref="/demo/launch"
+        primaryLabel="Try the demo"
+        secondaryHref="/signup"
+        secondaryLabel="Get started"
         disclaimer="USD list prices — regional partners may offer localized pricing."
       />
     </div>

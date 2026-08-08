@@ -15,6 +15,7 @@ const PUBLIC_PATHS = new Set([
   "/pricing",
   "/pitch",
   "/demo",
+  "/demo/launch",
   "/login",
   "/signup",
 ]);
@@ -23,14 +24,21 @@ const PROTECTED_PREFIXES = [
   "/dashboard",
   "/clients",
   "/audits",
+  "/licenses",
+  "/utilization",
+  "/compliance",
   "/recommendations",
+  "/roadmap",
+  "/renewals",
   "/reports",
+  "/advisory",
+  "/portal",
   "/settings",
   "/admin",
 ];
 
 function isPublicPath(pathname: string): boolean {
-  return PUBLIC_PATHS.has(pathname);
+  return PUBLIC_PATHS.has(pathname) || pathname.startsWith("/demo/");
 }
 
 function isProtectedPath(pathname: string): boolean {
@@ -81,7 +89,6 @@ export default async function middleware(
   try {
     const authMiddleware = getAuthMiddleware();
     if (!authMiddleware) {
-      // Missing AUTH_SECRET: never crash Edge. Public always continues.
       if (isPublicPath(pathname) || !isProtectedPath(pathname)) {
         return NextResponse.next();
       }
@@ -106,11 +113,19 @@ export const config = {
     "/dashboard/:path*",
     "/clients/:path*",
     "/audits/:path*",
+    "/licenses/:path*",
+    "/utilization/:path*",
+    "/compliance/:path*",
     "/recommendations/:path*",
+    "/roadmap/:path*",
+    "/renewals/:path*",
     "/reports/:path*",
+    "/advisory/:path*",
+    "/portal/:path*",
     "/settings/:path*",
     "/admin/:path*",
     "/login",
     "/signup",
+    "/demo/launch",
   ],
 };

@@ -2,38 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import {
-  Building2,
-  CalendarDays,
-  ChevronLeft,
-  FileText,
-  LayoutDashboard,
-  Lightbulb,
-  ScanSearch,
-  Settings,
-  Shield,
-} from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import { cn, springConfig } from "../lib/cn";
+import { APP_NAV_ITEMS, type AppNavItem } from "../lib/nav";
 import { BrandLogo } from "./BrandLogo";
 import { Tooltip } from "./Tooltip";
 
-export interface NavItem {
-  label: string;
-  href: string;
-  icon: React.ComponentType<{ size?: number; className?: string }>;
-  adminOnly?: boolean;
-}
-
-const defaultNavItems: NavItem[] = [
-  { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  { label: "Clients", href: "/clients", icon: Building2 },
-  { label: "Audits", href: "/audits", icon: ScanSearch },
-  { label: "Renewals", href: "/renewals", icon: CalendarDays },
-  { label: "Reports", href: "/reports", icon: FileText },
-  { label: "Recommendations", href: "/recommendations", icon: Lightbulb },
-  { label: "Settings", href: "/settings", icon: Settings },
-  { label: "Admin", href: "/admin", icon: Shield, adminOnly: true },
-];
+export type NavItem = AppNavItem;
 
 export interface SideNavProps {
   collapsed: boolean;
@@ -77,7 +52,7 @@ function NavLinks({
               active
                 ? "bg-[var(--sidebar-accent)] text-[var(--brand-primary)]"
                 : "text-[var(--text-secondary)] hover:bg-[var(--surface-sunken)] hover:text-[var(--text-primary)]",
-              collapsed && "justify-center px-2"
+              collapsed && "justify-center px-2",
             )}
           >
             {active && (
@@ -108,11 +83,11 @@ export function SideNav({
   onNavigate,
   variant = "sidebar",
 }: SideNavProps) {
-  const items = defaultNavItems.filter((item) => !item.adminOnly || showAdmin);
+  const items = APP_NAV_ITEMS.filter((item) => !item.adminOnly || showAdmin);
 
   if (variant === "drawer") {
     return (
-      <nav className="flex-1 space-y-0.5 px-2 pt-4">
+      <nav className="flex-1 space-y-0.5 overflow-y-auto px-2 pt-4">
         <div className="mb-4 px-3">
           <BrandLogo size="md" href="/dashboard" />
         </div>
@@ -127,7 +102,7 @@ export function SideNav({
       transition={springConfig}
       className={cn(
         "hidden md:flex shrink-0 flex-col border-r border-[var(--sidebar-border)]",
-        "bg-[var(--sidebar-bg)] backdrop-blur-xl h-[calc(100vh-var(--header-height))]"
+        "bg-[var(--sidebar-bg)] backdrop-blur-xl h-[calc(100vh-var(--header-height))]",
       )}
     >
       <div className={cn("flex items-center px-3 py-4", collapsed ? "justify-center" : "gap-2")}>
@@ -138,7 +113,7 @@ export function SideNav({
         )}
       </div>
 
-      <nav className="flex-1 space-y-0.5 px-2">
+      <nav className="flex-1 space-y-0.5 overflow-y-auto px-2">
         <NavLinks items={items} collapsed={collapsed} currentPath={currentPath} onNavigate={onNavigate} />
       </nav>
 
@@ -148,7 +123,7 @@ export function SideNav({
           onClick={onToggle}
           className={cn(
             "flex w-full items-center gap-2 rounded-[var(--button-radius)] px-3 py-2",
-            "text-[var(--text-tertiary)] hover:bg-[var(--surface-sunken)] hover:text-[var(--text-primary)]"
+            "text-[var(--text-tertiary)] hover:bg-[var(--surface-sunken)] hover:text-[var(--text-primary)]",
           )}
           aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
         >

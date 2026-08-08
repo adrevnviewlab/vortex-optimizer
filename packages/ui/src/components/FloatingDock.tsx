@@ -2,28 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import {
-  Building2,
-  CalendarDays,
-  FileText,
-  LayoutDashboard,
-  Lightbulb,
-  ScanSearch,
-  Settings,
-  Shield,
-} from "lucide-react";
 import { cn, springConfig } from "../lib/cn";
-
-const dockItems = [
-  { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  { label: "Clients", href: "/clients", icon: Building2 },
-  { label: "Audits", href: "/audits", icon: ScanSearch },
-  { label: "Renewals", href: "/renewals", icon: CalendarDays },
-  { label: "Reports", href: "/reports", icon: FileText },
-  { label: "Recommendations", href: "/recommendations", icon: Lightbulb },
-  { label: "Settings", href: "/settings", icon: Settings },
-  { label: "Admin", href: "/admin", icon: Shield },
-];
+import { APP_NAV_ITEMS } from "../lib/nav";
 
 export interface FloatingDockProps {
   currentPath?: string;
@@ -59,7 +39,9 @@ export function FloatingDock({
     };
   }, []);
 
-  const items = dockItems.filter((item) => item.href !== "/admin" || showAdmin);
+  const items = APP_NAV_ITEMS.filter(
+    (item) => (item.dock || isMobile) && (!item.adminOnly || showAdmin),
+  );
   const show = isMobile || visible;
   const sidenavOffset = sidenavCollapsed
     ? "var(--sidenav-collapsed)"
@@ -80,18 +62,17 @@ export function FloatingDock({
         isMobile
           ? undefined
           : {
-              /* Center within content band so the dock never sits under the sidenav */
               left: `calc(${sidenavOffset} + (100vw - ${sidenavOffset}) / 2)`,
             }
       }
       className={cn(
         "fixed bottom-4 z-40 -translate-x-1/2",
-        isMobile && "left-1/2",
-        "flex items-center gap-0.5 rounded-2xl px-2 py-1.5 md:gap-1 md:px-3 md:py-2",
+        isMobile && "left-1/2 max-w-[calc(100vw-1.5rem)]",
+        "flex items-center gap-0.5 overflow-x-auto rounded-2xl px-2 py-1.5 md:gap-1 md:px-3 md:py-2",
         "border border-[var(--surface-dock-border)] bg-[var(--surface-dock)] shadow-[var(--shadow-dock)]",
         "backdrop-blur-[20px]",
         "pb-[max(0.5rem,env(safe-area-inset-bottom))]",
-        !show && !isMobile && "pointer-events-none"
+        !show && !isMobile && "pointer-events-none",
       )}
       aria-label="Quick navigation"
     >
@@ -107,9 +88,9 @@ export function FloatingDock({
             whileHover={isMobile ? undefined : { scale: 1.22, y: -4 }}
             transition={{ ...springConfig, delay: i * 0.02 }}
             className={cn(
-              "relative flex h-10 w-10 items-center justify-center rounded-xl md:h-12 md:w-12",
+              "relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl md:h-12 md:w-12",
               "text-[var(--text-secondary)] hover:text-[var(--brand-primary)]",
-              active && "text-[var(--brand-primary)]"
+              active && "text-[var(--brand-primary)]",
             )}
             aria-label={item.label}
           >

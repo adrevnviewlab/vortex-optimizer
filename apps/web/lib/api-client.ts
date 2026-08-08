@@ -1546,3 +1546,246 @@ export async function syncMicrosoft(
     recordsProcessed: data?.recordsProcessed,
   };
 }
+
+export interface LicenseInventoryItem {
+  sku: string;
+  productFamily: string;
+  quantity: number;
+  assigned: number;
+  unused: number;
+  costMonthly: number;
+  overlapRisk: "low" | "medium" | "high";
+}
+
+export interface UtilizationRow {
+  sku: string;
+  assigned: number;
+  active30d: number;
+  inactive: number;
+  utilizationPct: number;
+  lastSignInTrend: string;
+}
+
+export interface RoadmapPhase {
+  id: string;
+  phase: string;
+  window: string;
+  effort: "Low" | "Medium" | "High";
+  savingsAnnual: number;
+  status: "planned" | "in_progress" | "done";
+  items: string[];
+}
+
+export interface AdvisoryNote {
+  id: string;
+  client: string;
+  date: string;
+  author: string;
+  type: "meeting" | "email" | "note";
+  summary: string;
+}
+
+export interface PortalFinding {
+  id: string;
+  title: string;
+  severity: string;
+  savings: number;
+  status: "pending" | "approved" | "deferred";
+}
+
+const SEED_LICENSES: LicenseInventoryItem[] = [
+  { sku: "Microsoft 365 E5", productFamily: "M365", quantity: 180, assigned: 162, unused: 18, costMonthly: 10260, overlapRisk: "high" },
+  { sku: "Microsoft 365 E3", productFamily: "M365", quantity: 420, assigned: 401, unused: 19, costMonthly: 15120, overlapRisk: "medium" },
+  { sku: "Microsoft 365 F3", productFamily: "M365", quantity: 95, assigned: 88, unused: 7, costMonthly: 760, overlapRisk: "low" },
+  { sku: "Power BI Pro", productFamily: "Power Platform", quantity: 62, assigned: 41, unused: 21, costMonthly: 620, overlapRisk: "high" },
+  { sku: "Teams Phone Standard", productFamily: "Teams", quantity: 48, assigned: 31, unused: 17, costMonthly: 384, overlapRisk: "medium" },
+  { sku: "Entra ID P2", productFamily: "Entra", quantity: 120, assigned: 95, unused: 25, costMonthly: 1080, overlapRisk: "medium" },
+  { sku: "Azure AD P1", productFamily: "Entra", quantity: 300, assigned: 278, unused: 22, costMonthly: 1800, overlapRisk: "low" },
+];
+
+const SEED_UTILIZATION: UtilizationRow[] = [
+  { sku: "Microsoft 365 E5", assigned: 162, active30d: 118, inactive: 44, utilizationPct: 73, lastSignInTrend: "Declining" },
+  { sku: "Microsoft 365 E3", assigned: 401, active30d: 372, inactive: 29, utilizationPct: 93, lastSignInTrend: "Stable" },
+  { sku: "Power BI Pro", assigned: 41, active30d: 22, inactive: 19, utilizationPct: 54, lastSignInTrend: "Declining" },
+  { sku: "Teams Phone Standard", assigned: 31, active30d: 18, inactive: 13, utilizationPct: 58, lastSignInTrend: "Declining" },
+  { sku: "Entra ID P2", assigned: 95, active30d: 71, inactive: 24, utilizationPct: 75, lastSignInTrend: "Stable" },
+];
+
+const SEED_ROADMAP: RoadmapPhase[] = [
+  {
+    id: "p1",
+    phase: "Quick wins",
+    window: "0–30 days",
+    effort: "Low",
+    savingsAnnual: 28400,
+    status: "in_progress",
+    items: ["Reclaim inactive E5 seats", "Remove duplicate Teams Phone", "Disable orphaned Power BI Pro"],
+  },
+  {
+    id: "p2",
+    phase: "Right-sizing",
+    window: "30–90 days",
+    effort: "Medium",
+    savingsAnnual: 41200,
+    status: "planned",
+    items: ["E5 → E3 for non-security roles", "Consolidate Entra P2 to P1", "Frontline F3 alignment"],
+  },
+  {
+    id: "p3",
+    phase: "Renewal alignment",
+    window: "90–180 days",
+    effort: "High",
+    savingsAnnual: 18600,
+    status: "planned",
+    items: ["EA true-up scenario", "Azure hybrid benefit review", "Procurement narrative pack"],
+  },
+];
+
+const SEED_ADVISORY: AdvisoryNote[] = [
+  {
+    id: "a1",
+    client: "Contoso Ltd",
+    date: "2026-07-30",
+    author: "Demo Admin",
+    type: "meeting",
+    summary: "Kickoff: confirmed EA renewal window and prioritized inactive E5 reclamation.",
+  },
+  {
+    id: "a2",
+    client: "Contoso Ltd",
+    date: "2026-08-02",
+    author: "Demo Admin",
+    type: "note",
+    summary: "Finance requested board-ready PDF with phased roadmap before Aug procurement review.",
+  },
+  {
+    id: "a3",
+    client: "Fabrikam Inc",
+    date: "2026-07-26",
+    author: "Demo Admin",
+    type: "email",
+    summary: "Shared draft findings; client approved Power BI Pro cleanup recommendations.",
+  },
+];
+
+const SEED_PORTAL: PortalFinding[] = [
+  { id: "pf1", title: "Downgrade 45 inactive E5 to E3", severity: "high", savings: 22500, status: "pending" },
+  { id: "pf2", title: "Remove duplicate Power BI Pro licenses", severity: "medium", savings: 8400, status: "approved" },
+  { id: "pf3", title: "Reclaim unused Teams Phone licenses", severity: "medium", savings: 4800, status: "pending" },
+  { id: "pf4", title: "Consolidate Entra ID P2 for non-privileged users", severity: "high", savings: 15200, status: "deferred" },
+];
+
+export async function fetchLicenseInventory(): Promise<{
+  licenses: LicenseInventoryItem[];
+  readiness: string | null;
+}> {
+  const { audit } = await fetchAuditDetail(DEMO_CONTOSO_AUDIT_ID);
+  const snapshots = audit?.licenseSnapshots;
+  if (snapshots && snapshots.length > 0) {
+    const licenses: LicenseInventoryItem[] = snapshots.map((s) => {
+      const unused = Math.max(0, Math.round(s.quantity * 0.12));
+      return {
+        sku: s.sku,
+        productFamily: s.sku.includes("Azure") || s.sku.includes("Entra") ? "Entra" : "M365",
+        quantity: s.quantity,
+        assigned: s.quantity - unused,
+        unused,
+        costMonthly: s.costMonthly,
+        overlapRisk: unused > 15 ? "high" : unused > 8 ? "medium" : "low",
+      };
+    });
+    return { licenses, readiness: "live" };
+  }
+  return { licenses: SEED_LICENSES, readiness: "stub" };
+}
+
+export async function fetchUtilization(): Promise<{
+  rows: UtilizationRow[];
+  readiness: string | null;
+}> {
+  return { rows: SEED_UTILIZATION, readiness: "stub" };
+}
+
+export async function fetchSavingsRoadmap(): Promise<{
+  phases: RoadmapPhase[];
+  readiness: string | null;
+}> {
+  const { recommendations, readiness } = await fetchRecommendations();
+  if (recommendations.length > 0 && readiness === "live") {
+    const total = recommendations.reduce((sum, r) => sum + r.savings, 0);
+    return {
+      phases: [
+        {
+          id: "live-1",
+          phase: "Approved & quick wins",
+          window: "0–30 days",
+          effort: "Low",
+          savingsAnnual: Math.round(total * 0.35),
+          status: "in_progress",
+          items: recommendations.slice(0, 2).map((r) => r.title),
+        },
+        {
+          id: "live-2",
+          phase: "Right-sizing",
+          window: "30–90 days",
+          effort: "Medium",
+          savingsAnnual: Math.round(total * 0.4),
+          status: "planned",
+          items: recommendations.slice(2, 4).map((r) => r.title),
+        },
+        ...SEED_ROADMAP.slice(2),
+      ],
+      readiness,
+    };
+  }
+  return { phases: SEED_ROADMAP, readiness: readiness ?? "stub" };
+}
+
+export async function fetchAdvisoryNotes(): Promise<{
+  notes: AdvisoryNote[];
+  readiness: string | null;
+}> {
+  return { notes: SEED_ADVISORY, readiness: "stub" };
+}
+
+export async function fetchPortalFindings(): Promise<{
+  findings: PortalFinding[];
+  clientName: string;
+  readiness: string | null;
+}> {
+  const { recommendations, readiness } = await fetchRecommendations();
+  if (recommendations.length > 0) {
+    return {
+      clientName: "Contoso Ltd",
+      readiness: readiness ?? "stub",
+      findings: recommendations.map((r) => ({
+        id: r.id,
+        title: r.title,
+        severity: r.confidence >= 90 ? "high" : "medium",
+        savings: r.savings,
+        status:
+          r.status === "approved"
+            ? "approved"
+            : r.status === "rejected"
+              ? "deferred"
+              : "pending",
+      })),
+    };
+  }
+  return { findings: SEED_PORTAL, clientName: "Contoso Ltd", readiness: "stub" };
+}
+
+export async function fetchComplianceOverview(): Promise<{
+  findings: FindingItem[];
+  readiness: string | null;
+  summary: { red: number; amber: number; green: number; savings: number };
+}> {
+  const { findings, readiness } = await fetchFindings(DEMO_CONTOSO_AUDIT_ID);
+  const summary = {
+    red: findings.filter((f) => f.severity === "critical" || f.severity === "high").length,
+    amber: findings.filter((f) => f.severity === "medium").length,
+    green: findings.filter((f) => f.severity === "low" || f.severity === "info").length,
+    savings: findings.reduce((sum, f) => sum + f.savings, 0),
+  };
+  return { findings, readiness, summary };
+}

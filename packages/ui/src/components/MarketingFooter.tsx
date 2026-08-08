@@ -14,10 +14,10 @@ export function MarketingFooter() {
     {
       title: "Resources",
       links: [
+        { href: "/demo/launch", label: "Try the live demo" },
         { href: "/demo", label: "Demo walkthrough" },
         { href: "/pitch", label: "Buyer pitch" },
         { href: "/features", label: "How it works" },
-        { href: "/pricing", label: "Plans & pricing" },
       ],
     },
     {
