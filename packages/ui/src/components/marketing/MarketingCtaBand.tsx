@@ -37,7 +37,7 @@ export function MarketingCtaBand({
           {secondaryHref && secondaryLabel && (
             <a
               href={secondaryHref}
-              className="inline-flex h-11 items-center border border-[var(--text-primary)] px-6 text-[var(--font-body-sm)] font-semibold text-[var(--text-primary)] hover:bg-[var(--surface-canvas)]"
+              className="inline-flex min-h-11 items-center border border-[var(--brand-primary)] px-6 py-2.5 text-[var(--font-body-sm)] font-semibold text-[var(--text-primary)] hover:bg-[var(--surface-canvas)]"
             >
               {secondaryLabel}
             </a>

@@ -105,13 +105,13 @@ export function MarketingNav({ currentPath }: MarketingNavProps) {
 
           <a
             href="/signup"
-            className="hidden h-9 items-center px-3 text-[var(--font-body-sm)] text-[var(--text-primary)] hover:underline sm:inline-flex"
+            className="hidden min-h-10 items-center px-3 text-[var(--font-body-sm)] font-semibold text-[var(--text-primary)] hover:underline sm:inline-flex"
           >
             Get started
           </a>
           <a
             href="/login"
-            className="inline-flex h-9 items-center bg-[var(--brand-primary)] px-3.5 text-[var(--font-body-sm)] font-semibold text-[var(--text-inverse)] hover:bg-[var(--brand-primary-hover)]"
+            className="vo-primary-cta inline-flex min-h-10 items-center bg-[var(--brand-primary)] px-5 py-2 text-[var(--font-body-sm)] font-semibold text-white hover:bg-[var(--brand-primary-hover)] hover:text-white"
           >
             Sign in
           </a>

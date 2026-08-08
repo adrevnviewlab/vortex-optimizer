@@ -14,9 +14,9 @@ export interface ButtonProps extends Omit<HTMLMotionProps<"button">, "ref"> {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    "bg-[var(--brand-primary)] text-[var(--text-inverse)] hover:bg-[var(--brand-primary-hover)] border-transparent font-semibold",
+    "vo-primary-cta bg-[var(--brand-primary)] text-white hover:bg-[var(--brand-primary-hover)] hover:text-white border-transparent font-semibold",
   secondary:
-    "bg-transparent text-[var(--text-primary)] border-[var(--text-primary)] hover:bg-[var(--surface-sunken)] font-semibold",
+    "bg-transparent text-[var(--text-primary)] border-[var(--brand-primary)] hover:bg-[var(--brand-primary-muted)] font-semibold",
   ghost:
     "bg-transparent text-[var(--text-secondary)] border-transparent hover:bg-[var(--brand-primary-muted)] hover:text-[var(--brand-primary)]",
   danger:
@@ -24,9 +24,9 @@ const variantStyles: Record<ButtonVariant, string> = {
 };
 
 const sizeStyles = {
-  sm: "h-8 px-3 text-[var(--font-body-sm)]",
-  md: "h-9 px-4 text-[var(--font-body-sm)]",
-  lg: "h-11 px-6 text-[var(--font-body-sm)]",
+  sm: "min-h-9 px-4 py-2 text-[var(--font-body-sm)]",
+  md: "min-h-11 px-5 py-2.5 text-[var(--font-body-sm)]",
+  lg: "min-h-12 px-6 py-3 text-[var(--font-body)]",
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -62,7 +62,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         transition={springConfig}
         onClick={handleClick}
         className={cn(
-          "inline-flex items-center justify-center gap-2 rounded-[var(--button-radius)] border font-medium",
+          "inline-flex items-center justify-center gap-2 rounded-[var(--button-radius)] border font-semibold",
           "transition-colors duration-[var(--duration-fast)]",
           "disabled:opacity-50 disabled:pointer-events-none",
           "cursor-pointer select-none",

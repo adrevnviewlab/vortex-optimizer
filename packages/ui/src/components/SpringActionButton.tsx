@@ -37,10 +37,10 @@ export function SpringActionButton({
       transition={springConfig}
       onClick={handleClick}
       className={cn(
-        "spring-action-rainbow inline-flex items-center justify-center gap-2",
-        "rounded-[var(--button-radius)] bg-[var(--brand-primary)] font-medium text-[var(--text-inverse)]",
-        "hover:bg-[var(--brand-primary-hover)] transition-colors",
-        iconOnly ? "h-9 w-9" : "h-9 px-4",
+        "vo-primary-cta spring-action-rainbow inline-flex items-center justify-center gap-2",
+        "rounded-[var(--button-radius)] bg-[var(--brand-primary)] font-semibold text-white",
+        "hover:bg-[var(--brand-primary-hover)] hover:text-white transition-colors",
+        iconOnly ? "min-h-10 w-10" : "min-h-10 px-5 py-2",
         tracing && "is-tracing",
         className
       )}

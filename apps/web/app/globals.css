@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Scan UI package — without this, classes like text-[var(--text-inverse)] never emit */
+@source "../../../packages/ui/src/**/*.{js,ts,jsx,tsx}";
+
 @theme inline {
   --font-sans: "Segoe UI", "Segoe UI Variable", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
   --font-display-family: "Segoe UI", "Segoe UI Variable", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;

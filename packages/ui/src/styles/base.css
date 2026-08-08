@@ -65,6 +65,21 @@ body {
   }
 }
 
+/**
+ * Primary CTA text must stay white even if a Tailwind utility is missing
+ * from the app bundle (monorepo scan gaps). Used by Button / MarketingPrimaryLink / nav.
+ */
+.vo-primary-cta {
+  background-color: var(--brand-primary);
+  color: #ffffff;
+}
+
+.vo-primary-cta:hover,
+.vo-primary-cta:focus-visible {
+  background-color: var(--brand-primary-hover);
+  color: #ffffff;
+}
+
 /* Rainbow trace for SpringActionButton */
 @keyframes rainbow-border {
   0% {
