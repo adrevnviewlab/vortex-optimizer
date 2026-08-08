@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@sentry/nextjs": "^10.69.0",
     "@vorzop/db": "workspace:*",
     "@vorzop/shared": "workspace:*",
     "@vorzop/ui": "workspace:*",

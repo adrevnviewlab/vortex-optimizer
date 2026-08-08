@@ -2,6 +2,9 @@ import "dotenv/config";
 import { serve } from "@hono/node-server";
 import { createApp } from "./app.js";
 import { getEnv } from "./lib/env.js";
+import { initSentry } from "./lib/sentry.js";
+
+initSentry();
 
 const env = getEnv();
 const app = createApp();

@@ -36,6 +36,11 @@ Enable PITR on the production branch. Use Neon branches for preview/staging envi
 | `DATABASE_URL` | Yes | Neon pooled URL (Auth.js + register) |
 | `NEXT_PUBLIC_API_URL` | Yes | Render API URL |
 | `API_URL` | Yes | Same as public API URL (server components) |
+| `NEXT_PUBLIC_SENTRY_DSN` | No | Sentry browser/edge DSN; omit to disable |
+| `SENTRY_DSN` | No | Sentry server DSN (can match public DSN) |
+| `SENTRY_AUTH_TOKEN` | No | Source maps upload on Vercel build only |
+| `SENTRY_ORG` / `SENTRY_PROJECT` | No | Required with auth token for source maps |
+| `SENTRY_TRACES_SAMPLE_RATE` | No | Default `0.1` |
 
 ### Render (`apps/api`)
 
@@ -48,8 +53,22 @@ Enable PITR on the production branch. Use Neon branches for preview/staging envi
 | `API_JWT_SECRET` | Yes | Min 16 chars; rotate quarterly |
 | `STRIPE_CONNECTED` | No | `false` until Stripe connected |
 | `FEATURE_GRAPH_SYNC` | No | `false` until Graph registered |
+| `SENTRY_DSN` | No | Sentry Node DSN; omit to disable |
+| `SENTRY_TRACES_SAMPLE_RATE` | No | Default `0.1` |
 
 See `.env.example` for the full list.
+
+## Sentry error monitoring
+
+Sentry is **gated**: web and API boot normally when DSNs are unset (same pattern as Stripe).
+
+1. Create a Sentry project (platform: Next.js for web; Node for API, or one shared project).
+2. Copy the DSN from **Settings → Client Keys (DSN)**.
+3. **Vercel** (`apps/web`): set `NEXT_PUBLIC_SENTRY_DSN` (and optionally `SENTRY_DSN`). For readable stack traces on production builds, also set `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, and `SENTRY_PROJECT` (auth token from Sentry → Settings → Auth Tokens; org/project slugs from the project URL).
+4. **Render** (`apps/api`): set `SENTRY_DSN` (and optional `SENTRY_TRACES_SAMPLE_RATE`).
+5. Redeploy. Trigger a test 500 or use Sentry’s verify flow; confirm the issue appears in the Sentry project.
+
+Never commit real DSNs or `SENTRY_AUTH_TOKEN` — keep them in host env only.
 
 ## Deploy procedure
 
@@ -86,6 +105,8 @@ Do **not** run seed on production unless intentionally resetting a demo tenant.
 - **Build:** `pnpm turbo build --filter=@vorzop/web`
 
 ## Health monitoring
+
+Unhandled exceptions are reported to Sentry when DSNs are set (see [Sentry error monitoring](#sentry-error-monitoring)).
 
 ### Endpoints
 

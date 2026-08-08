@@ -1,6 +1,5 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import type { JWT } from "next-auth/jwt";
 import bcrypt from "bcryptjs";
 import { and, desc, eq, gt } from "drizzle-orm";
 import {
@@ -9,14 +8,8 @@ import {
   users,
 } from "@vorzop/db/schema";
 import type { OrgRole } from "@vorzop/shared";
+import { authConfig } from "./auth.config";
 import { getDb } from "./lib/db";
-
-type AppJwt = JWT & {
-  userId?: string;
-  activeOrgId?: string;
-  role?: OrgRole;
-  sessionToken?: string;
-};
 
 type AuthUser = {
   id: string;
@@ -60,12 +53,7 @@ async function persistSession(userId: string, sessionToken: string) {
 }
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  trustHost: true,
-  secret: process.env.AUTH_SECRET,
-  session: { strategy: "jwt", maxAge: 30 * 24 * 60 * 60 },
-  pages: {
-    signIn: "/login",
-  },
+  ...authConfig,
   providers: [
     Credentials({
       name: "Email and password",
@@ -125,34 +113,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       },
     }),
   ],
-  callbacks: {
-    async jwt({ token, user }) {
-      const appToken = token as AppJwt;
-      if (user) {
-        const authUser = user as AuthUser;
-        appToken.userId = authUser.id;
-        appToken.activeOrgId = authUser.activeOrgId;
-        appToken.role = authUser.role;
-        appToken.sessionToken = authUser.sessionToken;
-        appToken.email = authUser.email;
-        appToken.name = authUser.name;
-      }
-      return appToken;
-    },
-    async session({ session, token }) {
-      const appToken = token as AppJwt;
-      if (appToken.userId && appToken.activeOrgId && appToken.role) {
-        Object.assign(session.user, {
-          id: appToken.userId,
-          email: appToken.email ?? "",
-          name: appToken.name ?? null,
-          activeOrgId: appToken.activeOrgId,
-          role: appToken.role,
-        });
-      }
-      return session;
-    },
-  },
 });
 
 export async function getSessionTokenForBridge(): Promise<{

@@ -40,6 +40,9 @@ const envSchema = z.object({
   GRAPH_REDIRECT_URI: z.string().url().optional(),
   GRAPH_WEBHOOK_SECRET: z.string().optional(),
   TOKEN_ENCRYPTION_KEY: z.string().optional(),
+  // Sentry (optional — app boots without DSN)
+  SENTRY_DSN: z.string().optional(),
+  SENTRY_TRACES_SAMPLE_RATE: z.coerce.number().min(0).max(1).optional(),
 });
 
 export type Env = z.infer<typeof envSchema>;

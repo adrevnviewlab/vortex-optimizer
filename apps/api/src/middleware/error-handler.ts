@@ -2,9 +2,13 @@ import type { Context } from "hono";
 import { HTTPException } from "hono/http-exception";
 import type { ContentfulStatusCode } from "hono/utils/http-status";
 import { ZodError } from "zod";
+import { captureException } from "../lib/sentry.js";
 
 export function errorHandler(err: Error, c: Context) {
   if (err instanceof HTTPException) {
+    if (err.status >= 500) {
+      captureException(err);
+    }
     return c.json(
       {
         error: err.message,
@@ -26,6 +30,7 @@ export function errorHandler(err: Error, c: Context) {
   }
 
   console.error(err);
+  captureException(err);
 
   return c.json(
     {
